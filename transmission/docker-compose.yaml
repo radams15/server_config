@@ -4,7 +4,7 @@ services:
         cap_add:
             - NET_ADMIN
         volumes:
-            - ./transmission:/data:z
+            - /mnt/share/transmission:/data:z
         environment:
             - OPENVPN_PROVIDER=PIA
             - OPENVPN_CONFIG=uk_london
@@ -42,7 +42,7 @@ services:
         volumes:
             - ./sonarr:/config:z
             - /mnt/share/TV:/tv:z
-            - ./transmission:/data:z
+            - /mnt/share/transmission:/data:z
         restart: unless-stopped
         network_mode: container:transmission-openvpn
 
@@ -56,6 +56,6 @@ services:
         volumes:
             - ./radarr:/config:z
             - /mnt/share/Movies:/movies:z
-            - ./transmission:/data:z
+            - /mnt/share/transmission:/data:z
         restart: unless-stopped
         network_mode: container:transmission-openvpn
