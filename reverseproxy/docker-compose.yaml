@@ -1,0 +1,8 @@
+version : "3"
+services :
+  nginx:
+    image: docker.io/nginx:latest
+    container_name: nginx_container
+    volumes:
+      - ./nginx:/etc/nginx:z
+    network_mode: host

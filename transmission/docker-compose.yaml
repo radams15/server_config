@@ -1,0 +1,61 @@
+version: '3.3'
+services:
+    transmission-openvpn:
+        cap_add:
+            - NET_ADMIN
+        volumes:
+            - ./transmission:/data:z
+        environment:
+            - OPENVPN_PROVIDER=PIA
+            - OPENVPN_CONFIG=uk_london
+            - OPENVPN_USERNAME=${VPN_USERNAME}
+            - OPENVPN_PASSWORD=${VPN_PW}
+            - LOCAL_NETWORK=172.26.128.0/17
+        privileged: true
+        ports:
+            - 9091:9091 # Transmission
+            - 9696:9696 # Prowlarr
+            - 7878:7878 # Radarr
+            - 8989:8989 # Sonarr
+        image: docker.io/haugene/transmission-openvpn:dev
+        container_name: transmission-openvpn
+        
+    prowlarr:
+        image: docker.io/linuxserver/prowlarr:develop
+        container_name: prowlarr
+        environment:
+          - PUID=1000
+          - PGID=1000
+          - TZ=GB
+        volumes:
+          - ./prowlarr:/config:z
+        restart: unless-stopped
+        network_mode: container:transmission-openvpn
+        
+    sonarr:
+        image: docker.io/linuxserver/sonarr:latest
+        container_name: sonarr
+        environment:
+            - PUID=1000
+            - PGID=1000
+            - TZ=GB
+        volumes:
+            - ./sonarr:/config:z
+            - /mnt/share/TV:/tv:z
+            - ./transmission:/data:z
+        restart: unless-stopped
+        network_mode: container:transmission-openvpn
+
+    radarr:
+        image: docker.io/linuxserver/radarr:latest
+        container_name: radarr
+        environment:
+            - PUID=1000
+            - PGID=1000
+            - TZ=GB
+        volumes:
+            - ./radarr:/config:z
+            - /mnt/share/Movies:/movies:z
+            - ./transmission:/data:z
+        restart: unless-stopped
+        network_mode: container:transmission-openvpn

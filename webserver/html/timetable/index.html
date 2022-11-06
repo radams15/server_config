@@ -1,0 +1,89 @@
+<html>
+	<head>
+		<title>Timetable</title>
+		
+		<script src="moment.min.js"></script>
+		<script src="jquery-3.6.0.min.js"></script>
+
+		<style>
+			#table {
+			  font-family: Arial, Helvetica, sans-serif;
+			  border-collapse: collapse;
+			  width: 100%;
+			}
+
+			#table td, #table th {
+			  border: 1px solid #ddd;
+			  padding: 8px;
+			}
+
+			#table tr:nth-child(even){background-color: #f2f2f2;}
+
+			#table tr:hover {background-color: #ddd;}
+
+			#table th {
+			  padding-top: 12px;
+			  padding-bottom: 12px;
+			  text-align: left;
+			  background-color: #4CAF50;
+			  color: white;
+			}
+		</style>
+	</head>
+
+
+	<body>
+
+	<table id="table">
+		<tr>
+			<th>Lesson</th>
+			<th>Room</th>
+			<th>Time</th>
+		</tr>
+	</table>
+
+	</body>
+
+	<script>
+		var todayDate = moment(); // yyyy-mm-dd
+
+		if(todayDate.day() == 5 || todayDate.day() == 6){ // if day is sat or sun
+			todayDate = todayDate.startOf("isoWeek").add(1, "week"); // go to next mon
+		}
+
+
+		function setData(data){
+			var i = 0;
+			data.forEach(function(item, index){
+				var name = item[0];
+				var location = item[1];
+				var start = moment.unix(item[2]);
+				var end = moment.unix(item[3]);
+				
+				if(start.isSame(todayDate, 'day')){
+
+					$('table').append('<tr></tr>');
+					for(var j = 0; j < 3; j++) {
+						$('table').find('tr').eq(i+1).append('<td></td>');
+						var text = item[j];
+						if(j == 2){
+							text = moment.unix(parseFloat(item[j])).format("h:mm A");
+						}
+						$('table').find('tr').eq(i+1).find('td').eq(j).attr('data-row', i).attr('data-col', j).text(text);
+					}
+
+					i++;
+				}
+			});
+		}
+
+		var xhttp = new XMLHttpRequest();
+		xhttp.onreadystatechange = function() {
+			if (this.readyState == 4 && this.status == 200) {
+				setData(JSON.parse(this.responseText));
+			}
+		};
+		xhttp.open("GET", "/timetable.json", true);
+xhttp.send();
+	</script>
+</html>

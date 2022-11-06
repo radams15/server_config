@@ -1,0 +1,20 @@
+tunnel: 13cbcc70-7650-4752-9ea7-e7088d07925e
+credentials-file: /etc/cloudflared/13cbcc70-7650-4752-9ea7-e7088d07925e.json
+
+ingress:
+#  - hostname: files.therhys.co.uk
+#    service: http://files.therhys.co.uk
+#  - hostname: matrix.therhys.co.uk
+#    service: http://matrix:8008
+#  - hostname: cloud.therhys.co.uk
+#    service: http://nextcloud
+#  - hostname: ssh.therhys.co.uk
+#    service: ssh://server:22
+#  - hostname: dav.therhys.co.uk
+#    service: http://webdav
+  - service: http://127.0.0.1:80
+
+originRequest:
+  noTLSVerify: true
+
+no-tls-verify: true
