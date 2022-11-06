@@ -8,8 +8,8 @@ ingress:
 #    service: http://matrix:8008
 #  - hostname: cloud.therhys.co.uk
 #    service: http://nextcloud
-#  - hostname: ssh.therhys.co.uk
-#    service: ssh://server:22
+  - hostname: ssh.therhys.co.uk
+    service: ssh://127.0.0.1:22
 #  - hostname: dav.therhys.co.uk
 #    service: http://webdav
   - service: http://127.0.0.1:80
