@@ -23,7 +23,8 @@
 				'Sonarr' =>  '/sonarr',
                                 'Radarr' =>  '/radarr',
                                 'Prowlarr' =>  '/prowlarr',
-				'Github' => 'https://github.com/radams15'
+				'Github' => 'https://github.com/radams15',
+				'Jenkins' => '/jenkins/'
 			);
 		?>
 	</head>
