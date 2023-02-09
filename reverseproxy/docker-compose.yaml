@@ -6,3 +6,4 @@ services :
     volumes:
       - ./nginx:/etc/nginx:z
     network_mode: host
+
