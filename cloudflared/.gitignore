@@ -1,3 +1,0 @@
-cloudflared/*.json
-cloudflared/*.pem
-.env
