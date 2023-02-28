@@ -1,0 +1,11 @@
+version: '3.2'
+
+services:
+  cloudflared:
+    image: cloudflare/cloudflared
+    user: 0:0
+    network_mode: host
+    restart: unless-stopped
+    volumes:
+      - ./cloudflared:/etc/cloudflared:z
+    command: tunnel run

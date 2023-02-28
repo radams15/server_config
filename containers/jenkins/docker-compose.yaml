@@ -1,0 +1,15 @@
+version: '3.8'
+services:
+  jenkins:
+    build: .
+    privileged: true
+    user: 0:0
+    ports:
+      - 6060:8080
+      - 50000:50000
+    container_name: jenkins
+    volumes:
+      - ./jenkins_home:/var/jenkins_home:z
+      - /run/user/1000/podman/podman.sock:/var/run/docker.sock:z
+    environment:
+      - JENKINS_OPTS="--prefix=/jenkins"
