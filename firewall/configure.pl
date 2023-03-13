@@ -12,8 +12,9 @@ sub policy {
 }
 
 sub allow_port {
-	my ($port) = @_;
-	print "iptables -A INPUT -m state --state NEW -i $INTERFACE -p tcp --dport $port -j ACCEPT\n";
+	my $port = shift;
+	my $proto = shift // 'tcp';
+	print "iptables -A INPUT -m state --state NEW -i $INTERFACE -p $proto --dport $port -j ACCEPT\n";
 }
 
 sub allow_samba {
@@ -28,20 +29,12 @@ sub allow_samba {
 sub allow_samba_from {
 	foreach my $ip (@_){
 		foreach my $port (@SMB_PORTS) {
-			foreach my $proto ('udp', 'tcp') {
-				print "iptables -A INPUT -m state --state NEW -i $INTERFACE -p $proto -s $ip --dport $port -j ACCEPT\n";
-			}
+			allow_port($port, 'tcp'); 
+			allow_port($port, 'udp'); 
 		}
 	}	
 }
 
-sub allow_ssh {
-	&allow_port(22);
-}
-
-sub allow_http {
-	&allow_port(80);
-}
 
 sub allow_ping {
 	print "iptables -A INPUT -p icmp -j ACCEPT\n";
