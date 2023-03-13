@@ -11,6 +11,11 @@ sub policy {
 	print "iptables -A INPUT -p tcp -s localhost -j ACCEPT\n";
 }
 
+sub allow_port {
+	my ($port) = @_;
+	print "iptables -A INPUT -m state --state NEW -i $INTERFACE -p tcp --dport $port -j ACCEPT\n";
+}
+
 sub allow_samba {
 	foreach my $port (@SMB_PORTS) {
 		foreach my $proto ('udp', 'tcp') {
@@ -31,11 +36,11 @@ sub allow_samba_from {
 }
 
 sub allow_ssh {
-	print "iptables -A INPUT -m state --state NEW -i $INTERFACE -p tcp --dport 22 -j ACCEPT\n";
+	&allow_port(22);
 }
 
 sub allow_http {
-	print "iptables -A INPUT -m state --state NEW -i $INTERFACE -p tcp --dport 80 -j ACCEPT\n";
+	&allow_port(80);
 }
 
 sub allow_ping {
@@ -59,8 +64,9 @@ select FH; # Output every subsequent print statement to the file.
 &allow_localhost;
 #&allow_samba_from('172.29.74.142', '172.26.251.55');
 &allow_samba;
-&allow_http;
-&allow_ssh;
+&allow_port(22); # SSH
+&allow_port(80); # HTTP
+&allow_port(9999); # RedditBBS
 &allow_ping;
 
 &save;
