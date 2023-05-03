@@ -11,6 +11,6 @@ services :
       - php
       
   php:
-    image: docker.io/php:7-fpm
+    image: docker.io/php:8-fpm
     volumes:
       - ./html:/html:z

@@ -10,7 +10,7 @@ services:
             - OPENVPN_CONFIG=uk_london
             - OPENVPN_USERNAME=${VPN_USERNAME}
             - OPENVPN_PASSWORD=${VPN_PW}
-            - LOCAL_NETWORK=172.26.128.0/17
+            - LOCAL_NETWORK=192.168.1.0/24
         privileged: true
         ports:
             - 9091:9091 # Transmission
