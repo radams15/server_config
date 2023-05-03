@@ -16,6 +16,7 @@ chomp;
 
 if($op eq 'start'){
 	system("$COMPOSE pull");
+	system("$COMPOSE build");
 	system("$COMPOSE up -d");
 } elsif ($op eq 'stop'){
 	system("$COMPOSE down");
@@ -26,4 +27,5 @@ if($op eq 'start'){
 	system("$COMPOSE up -d");
 } elsif ($op eq 'pull'){
 	system("$COMPOSE pull");
+	system("$COMPOSE build");
 }

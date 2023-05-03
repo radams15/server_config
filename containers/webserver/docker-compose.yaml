@@ -1,16 +1,9 @@
 version : "3"
 services :
   nginx:
-    image: docker.io/nginx:latest
+    build: .
     ports:
       - 8080:80
     volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf:z
-      - ./html:/html:z
-    depends_on:
-      - php
-      
-  php:
-    image: docker.io/php:8-fpm
-    volumes:
-      - ./html:/html:z
+      - ./default.conf:/etc/apache2/sites-enabled/000-default.conf:z
+      - ./html:/var/www/html:z
