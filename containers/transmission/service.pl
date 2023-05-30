@@ -12,7 +12,7 @@ sub usage {
 }
 
 my $op = shift @ARGV or die &usage;
-chomp;
+
 
 if($op eq 'start'){
 	system("$COMPOSE pull");
