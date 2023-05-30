@@ -18,11 +18,12 @@
 
 			$urls = array(
 				'Cloud' => '/cloud/',
+				'Minecraft Map' => '/dynmap',
 				'Jellyfin' => '/jellyfin/',
 				'Transmission' =>  '/transmission',
 				'Sonarr' =>  '/sonarr/',
                                 'Radarr' =>  '/radarr/',
-                                'Prowlarr' =>  '/prowlarr/',
+                                'Jackett' =>  '/jackett/',
 				'Jenkins' => '/jenkins/',
 				'Github' => 'https://github.com/radams15',
 				'Github (University)' => 'https://github.com/rhys-cyber',
