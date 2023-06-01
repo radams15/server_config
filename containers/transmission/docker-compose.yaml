@@ -5,6 +5,7 @@ services:
             - NET_ADMIN
         volumes:
             - /mnt/share/transmission:/data:z
+            - ./transmission:/config:z
             - ./resolv.conf:/etc/resolv.conf:z
         environment:
             - OPENVPN_PROVIDER=PIA
@@ -22,7 +23,7 @@ services:
             - 6080:6080 # Soulseek
         image: docker.io/haugene/transmission-openvpn:dev
         container_name: transmission-openvpn
-   sonarr:
+    sonarr:
         image: docker.io/linuxserver/sonarr:latest
         container_name: sonarr
         environment:
