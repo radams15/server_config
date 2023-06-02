@@ -1,22 +1,12 @@
-<html>
-	<head>
-		<title>TheRhys</title>
+#!/usr/bin/perl
 
-		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
-		<link rel="stylesheet" href="style.css">
+use CGI;
 
-		<?php
-			function get_ip($host){
-				$host_data = file_get_contents('/etc/hosts');
+my $q = CGI->new;
 
-				$matches = array();
+print $q->header;
 
-				preg_match_all("/(.*?) $host.*/m", $host_data, $matches, PREG_SET_ORDER, 0);
-
-				return $matches[0][1];
-			}
-
-			$urls = array(
+my %URLS = (
 				'Cloud' => '/cloud/',
 				'Minecraft Map' => '/dynmap',
 				'Jellyfin' => '/jellyfin/',
@@ -28,11 +18,30 @@
 				'Github' => 'https://github.com/radams15',
 				'Github (University)' => 'https://github.com/rhys-cyber',
 			);
-		?>
-	</head>
 
 
-	<body>
+while (<DATA>) {
+	if($_ =~ /\%URLS/) {
+		while(my ($name, $url) = each(%URLS)) {		
+			printf '<button class="btn btn-success btn-large" onclick="window.open(\'%s\')">
+			%s
+		</button>', $url, $name;
+		}
+
+	} else {
+		print $q->p($_);
+	}
+}
+
+__DATA__
+<html>
+	<head>
+		<title>TheRhys</title>
+
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+		<link rel="stylesheet" href="style.css">
+			</head>
+<body>
 		<div class="container">
 		<div class="jumbotron">
 			<div class="container">
@@ -49,11 +58,7 @@
 
 		<div class="container rounded">
 			<div class="row">
-				<?php foreach ($urls as $name => $url): ?>
-					<button class="btn btn-success btn-large" onclick="window.open('<?=$url?>')">
-						<?=$name?>
-					</button>
-				<?php endforeach?>
+				%URLS
 			</div>
 		</div>
 
