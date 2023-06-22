@@ -1,0 +1,56 @@
+version: "3.3"
+
+services:
+  lemmy:
+    image: docker.io/dessalines/lemmy:0.17.3
+    hostname: lemmy
+    restart: always
+    ports:
+      - 8536:8536
+    environment:
+      - RUST_LOG="warn,lemmy_server=info,lemmy_api=info,lemmy_api_common=info,lemmy_api_crud=info,lemmy_apub=info,lemmy_db_schema=info,lemmy_db_views=info,lemmy_db_views_actor=info,lemmy_db_views_moderator=info,lemmy_routes=info,lemmy_utils=info,lemmy_websocket=info"
+    volumes:
+      - ./lemmy.hjson:/config/config.hjson:z
+    depends_on:
+      - postgres
+      - pictrs
+
+  lemmy-ui:
+    image: docker.io/dessalines/lemmy-ui:0.17.3
+    ports:
+      - 1234:1234
+      - 1236:1236
+    environment:
+      # this needs to match the hostname defined in the lemmy service
+      - LEMMY_UI_LEMMY_INTERNAL_HOST=lemmy:8536
+      # set the outside hostname here
+      - LEMMY_UI_LEMMY_EXTERNAL_HOST=localhost:1236
+      - LEMMY_HTTPS=true
+    depends_on:
+      - lemmy
+    restart: always
+
+  pictrs:
+    image: docker.io/asonix/pictrs:0.3.1
+    # this needs to match the pictrs url in lemmy.hjson
+    hostname: pictrs
+    # we can set options to pictrs like this, here we set max. image size and forced format for conversion
+    # entrypoint: /sbin/tini -- /usr/local/bin/pict-rs -p /mnt -m 4 --image-format webp
+    environment:
+      - PICTRS__API_KEY=API_KEY
+    user: root:root
+    volumes:
+      - ./volumes/pictrs:/mnt:z
+    restart: always
+
+  postgres:
+    image: docker.io/postgres:15-alpine
+    # this needs to match the database host in lemmy.hson
+    hostname: postgres
+    environment:
+      - POSTGRES_USER=lemmy
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=lemmy
+    volumes:
+      - ./volumes/postgres:/var/lib/postgresql/data:z
+    restart: always

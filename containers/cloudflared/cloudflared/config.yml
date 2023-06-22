@@ -10,8 +10,8 @@ ingress:
 #    service: http://nextcloud
 #  - hostname: ssh.therhys.co.uk
 #    service: ssh://127.0.0.1:22
-#  - hostname: dav.therhys.co.uk
-#    service: http://webdav
+  - hostname: lemmy.therhys.co.uk
+    service: https://127.0.0.1:3031
   - service: http://127.0.0.1:80
 
 originRequest:

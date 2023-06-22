@@ -8,7 +8,7 @@ print $q->header;
 
 my %URLS = (
 				'Cloud' => '/cloud/',
-				'Minecraft Map' => '/dynmap',
+				'Minecraft Map' => 'http://mc.therhys.co.uk',
 				'Jellyfin' => '/jellyfin/',
 				'Transmission' =>  '/transmission',
 				'Sonarr' =>  '/sonarr/',
