@@ -7,7 +7,7 @@ use Text::Markdown qw/ markdown /;
 use lib '.';
 use shared ();
 
-print CGI::header;
+print CGI::header("text/html;charset=UTF-8");
 
 my $POST_DIR = "posts";
 
@@ -47,22 +47,37 @@ sub load_post {
 	$fname = "$POST_DIR/$fname";
 	
 	open FH, '<', $fname or return h1("Unknown post!");
-	until((<FH>) =~ /----*/){}; # Skip the header
+	
+	my %conf;
+	until((my $line = <FH>) =~ /^----*/) {
+		next unless $line =~ /.*:.*/g; # Skip unless there is key: value
+		
+		my ($k, $v) = split /:\s*/, $line;
+		$conf{$k} = $v;
+	}
 	my $data = join '', <FH>;
 	close FH;
+	
+	my $infobar = div(
+		{
+			class => 'post_infobar'
+		},
+		"Published: $conf{Published}<br>Tags: $conf{Tags}",
+	);
 	
 	if($fname =~ /\.md$/) {
 		return div(
 			{
 				class => 'post_body centre_page',
 			},
+			$infobar,
 			markdown($data, {
 				empty_element_suffix => '>',
 				tab_width => 2
 			})
 		);
 	} elsif($fname =~ /\.html/) {
-		return div(
+		return $infobar, div(
 			{
 				class => 'post_body centre_page',
 			},

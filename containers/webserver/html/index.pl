@@ -5,7 +5,7 @@ use CGI ':standard';
 use lib '.';
 use shared ();
 
-print CGI::header;
+print CGI::header("text/html;charset=UTF-8");
 
 sub titlepage {
 	(
