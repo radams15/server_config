@@ -37,3 +37,8 @@ li {
 	font-size: 1.2em;
 	color: var(--base0);
 }
+
+.post_body {
+	margin-top: 1em;
+	border: 1px solid var(--red);
+}

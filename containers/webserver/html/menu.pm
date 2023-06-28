@@ -18,8 +18,9 @@ my %MENU = (
 				'Github' => 'https://github.com/radams15',
 				'Github (University)' => 'https://github.com/rhys-cyber',
 	},
+	Blog => '/blog.pl',
 );
-my @order = qw/ Home About Links /;
+my @order = qw/ Home About Blog Links /;
 
 sub page_head {
 	my ($title) = @_;
@@ -68,7 +69,7 @@ sub navbar_items {
 					{
 						class => 'dropdown-content'
 					},
-					&navbar_items($val, [keys %$val]),
+					&navbar_items($val, [sort keys %$val]),
 				)
 			);
 		} else {
