@@ -23,6 +23,7 @@ sub page_body {
 	(
 		&navbar,
 		&titlepage,
+		&footer,
 	);
 }
 	

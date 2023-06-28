@@ -2,7 +2,7 @@ use CGI ':standard';
 
 use Exporter 'import';
 
-our @EXPORT_OK = qw/ page_head navbar txt/;
+our @EXPORT_OK = qw/ page_head navbar footer txt/;
 
 my %MENU = (
 	Home => '/',
@@ -88,9 +88,11 @@ sub navbar_items {
 sub navbar {
 	(
 		div({
-			class => 'navbar'
+			class => 'navbar',
+			id => 'main_nav',
 		}, 
 		&navbar_items(\%MENU, \@order),
+		a({href=>"javascript:void(0);", class => 'icon', onclick => 'onDropDown()'}, 'Menu'),
 		),
 	);
 }
@@ -99,6 +101,17 @@ sub txt {
 	p({
 		class => 'text'
 	}, @_);
+}
+
+sub footer {
+	script('function onDropDown() {
+  var x = document.getElementById("main_nav");
+  if (x.className === "navbar") {
+    x.className += " responsive";
+  } else {
+    x.className = "navbar";
+  }
+} ');
 }
 
 1;

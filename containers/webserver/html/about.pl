@@ -63,6 +63,7 @@ sub page_body {
 	(
 		&navbar,
 		&page,
+		&footer,
 	);
 }
 	

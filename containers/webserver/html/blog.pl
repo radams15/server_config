@@ -112,6 +112,7 @@ sub index_body {
 	(
 		&navbar,
 		&page,
+		&footer,
 	);
 }
 
@@ -121,6 +122,7 @@ sub post_body {
 	(
 		&navbar,
 		&load_post($post_name),
+		&footer,
 	);
 }
 
