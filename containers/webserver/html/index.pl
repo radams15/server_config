@@ -1,77 +1,34 @@
 #!/usr/bin/perl
 
-use CGI;
+use CGI ':standard';
 
-my $q = CGI->new;
+use lib '.';
+use shared ();
 
-print $q->header;
+print CGI::header("text/html;charset=UTF-8");
 
-my %URLS = (
-				'Cloud' => '/cloud/',
-				'Minecraft Map' => 'http://mc.therhys.co.uk',
-				'Jellyfin' => '/jellyfin/',
-				'Transmission' =>  '/transmission',
-				'Sonarr' =>  '/sonarr/',
-                                'Radarr' =>  '/radarr/',
-                                'Jackett' =>  '/jackett/',
-				'Jenkins' => '/jenkins/',
-				'Github' => 'https://github.com/radams15',
-				'Github (University)' => 'https://github.com/rhys-cyber',
-			);
-
-
-while (<DATA>) {
-	if($_ =~ /\%URLS/) {
-		while(my ($name, $url) = each(%URLS)) {		
-			printf '<button class="btn btn-success btn-large" onclick="window.open(\'%s\')">
-			%s
-		</button>', $url, $name;
-		}
-
-	} else {
-		print $q->p($_);
-	}
+sub titlepage {
+	(
+		div({
+				class => 'title centre'
+			},
+			h1({ class=>'centre' }, 'Rhys Adams'),
+			txt("I'm Rhys - I study BSc Cyber Security at the University of Warwick."),
+			txt("I enjoy reverse engineering and low-level programming."),
+			txt("My GPG key is available", a({href=>'/radams.pgp'}, 'here'), ". (A53C 328F 5CA7 D1EA 4E16  0A58 C783 AD16 F241 1208)"),
+		),
+	);
 }
 
-__DATA__
-<html>
-	<head>
-		<title>TheRhys</title>
-
-		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
-		<link rel="stylesheet" href="style.css">
-			</head>
-<body>
-		<div class="container">
-		<div class="jumbotron">
-			<div class="container">
-				<h1>Rhys' Home page</h1>
-				<h2>Hosted services:</h2>
-			</div>
-		</div>
-		
-		<div class="container rounded centered">
-			<div class="row">
-				<iframe src="https://duckduckgo.com/search.html?width=250&prefill=Search &focus=yes" style="overflow:hidden;margin:0;padding:0;width:308px;height:40px;" frameborder="0"></iframe>
-			</div>
-		</div>
-
-		<div class="container rounded">
-			<div class="row">
-				%URLS
-			</div>
-		</div>
-
-		</div>
-
-
-
-
-		<!-- Optional theme -->
-		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap-theme.min.css" integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous">
-
-		<!-- Latest compiled and minified JavaScript -->
-		<script src="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
-
-	</body>
-</html>
+sub page_body {
+	(
+		&navbar,
+		&titlepage,
+		&footer,
+	);
+}
+	
+print html (
+	CGI::head(&page_head('Rhys Adams')),
+	CGI::body(&page_body),
+);
