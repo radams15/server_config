@@ -3,9 +3,20 @@
 use CGI ':standard';
 
 use lib '.';
-use menu ();
+use shared ();
 
 print CGI::header;
+
+sub li_a {
+	my ($name, $url) = @_;
+	
+	li(
+		a(
+			{href => $url},
+			$name,
+		)
+	);
+}
 
 sub page {
 	(
@@ -22,28 +33,29 @@ sub page {
 			
 			h2({ class=>'centre' }, 'Me'),
 			
-			txt("I'm currently studying BsC Cyber Security at the University of Warwick."),
+			txt("I'm currently studying BSc Cyber Security at the University of Warwick."),
 			txt("My favourite areas include binary exploitation and reverse engineering, as well as network design and implementation."),
 			txt("Of course, I also thouroughly enjoy programming with a variety of languages and tools:"),
 			ul(
 				# Languages
-				li('Perl'),
+				li_a('Perl', 'https://perl.org'),
 				ul (
-					li('Mojolicious'),
-					li('CGI.pm'),
+					li_a('Mojolicious', 'https://mojolicious.org'),
+					li_a('CGI.pm', 'https://metacpan.org/pod/CGI'),
 				),
-				li('Python'),
+				li_a('Python', 'https://python.org'),
 				li('C++'),
 				ul (
-					li('WxWidgets'),
-					li('Qt'),
+					li_a('WxWidgets', 'https://wxwidgets.org'),
+					li_a('Qt', 'https://qt.io'),
 				),
 				li('C'),
 				# Tools
-				li('Docker/Podman'),
-				li('Linux'),
+				li_a('Podman', 'https://podman.io'),
+				li_a('Docker', 'https://docker.io'),
+				li_a('Linux', 'https://kernel.org'),
 			),
-			txt("Some of my other interests include vintage computers, electronics, and music on a variety of formats."),
+			txt("Some of my other interests include vintage computers, electronics, and collecting music on a variety of formats."),
 			
 			
 			h2({ class=>'centre' }, 'The Website'),

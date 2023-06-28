@@ -5,46 +5,38 @@ use CGI ':standard';
 use Text::Markdown qw/ markdown /;
 
 use lib '.';
-use menu ();
+use shared ();
 
 print CGI::header;
 
 my $POST_DIR = "posts";
 
+use Data::Dumper;
+
 sub posts {
 	my @out;
 	
-	for (<$POST_DIR/*.md>) {
+	for (<$POST_DIR/*.{md,html}>) {
 		(my $fname = $_) =~ s:$POST_DIR/::g;
 		
 		open FH, '<', $_;
-		my $name = <FH>;
-		$name =~ s/#\s+//g;
-		
-		push @out, [$fname, $name];
-		
-		close FH;
-	}
-	
-	for (<$POST_DIR/*.html>) {
-		(my $fname = $_) =~ s:$POST_DIR/::g;
-		
-		open FH, '<', $_;
-		my $name;
-		while(<FH>) {
-			if(/<title>(.*?)<\/title>/g) {
-				$name = $1;
-				break;
-			}
+		my %conf;
+		until((my $line = <FH>) =~ /^----*/) {
+			next unless $line =~ /.*:.*/g; # Skip unless there is key: value
+			
+			my ($k, $v) = split /:\s*/, $line;
+			$conf{$k} = $v;
 		}
+		
+		$conf{Tags} = [split ',\s*', $conf{Tags}];
+		
+		push @out, [$fname, \%conf];
+		
 		close FH;
-		$name = $fname unless $name;
-
-		push @out, [$fname, $name];
 	}
 	
 	
-	@out;
+	sort {$$b[1]{Published} cmp $$a[1]{Published}} @out; # Return sorted by publish date.
 }
 
 sub load_post {
@@ -55,6 +47,7 @@ sub load_post {
 	$fname = "$POST_DIR/$fname";
 	
 	open FH, '<', $fname or return h1("Unknown post!");
+	until((<FH>) =~ /----*/){}; # Skip the header
 	my $data = join '', <FH>;
 	close FH;
 	
@@ -99,8 +92,16 @@ sub page {
 							{
 								href => "/blog.pl?post=$$_[0]",
 							},
-							$$_[1]
+							"$$_[1]{Title} - $$_[1]{Published}",
 						),
+						map {
+							p(
+								{
+									class => 'topic_round',
+								},
+								$_
+							)
+						} @{$$_[1]{Tags}},
 					)
 				} &posts,
 			),

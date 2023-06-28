@@ -3,7 +3,7 @@
 use CGI ':standard';
 
 use lib '.';
-use menu ();
+use shared ();
 
 print CGI::header;
 
@@ -13,8 +13,9 @@ sub titlepage {
 				class => 'title centre'
 			},
 			h1({ class=>'centre' }, 'Rhys Adams'),
-			txt("I'm Rhys - I study BsC Cyber Security at the University of Warwick."),
+			txt("I'm Rhys - I study BSc Cyber Security at the University of Warwick."),
 			txt("I enjoy reverse engineering and low-level programming."),
+			txt("My GPG key is available", a({href=>'/radams.pgp'}, 'here'), ". (A53C 328F 5CA7 D1EA 4E16  0A58 C783 AD16 F241 1208)"),
 		),
 	);
 }
