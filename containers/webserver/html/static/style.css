@@ -2,6 +2,23 @@ html {
 	background-color: var(--base3);
 }
 
+@media screen and (min-width: 601px) {
+    :root {
+        --h1: 3em;
+        --h2: 2em;
+        --text: 1em;
+    }
+}
+
+/* If the screen size is 600px wide or less, set the font-size of <div> to 30px */
+@media screen and (max-width: 600px) {
+    :root {
+        --h1: 3em;
+        --h2: 2em;
+        --text: 1em;
+    }
+}
+
 .title {
 	color: var(--base0);
 }
@@ -20,21 +37,17 @@ html {
 	border-radius: 5px;
 }
 
-.about {
-	
-}
-
 h2 {
 	color: var(--base0);
 }
 
 .text {
-	font-size: 1.2em;
+	font-size: var(--text);
 	color: var(--base0);
 }
 
 li, li a {
-	font-size: 1em;
+	font-size: var(--text);
 	padding: 5px;
 	color: var(--base0);
 }

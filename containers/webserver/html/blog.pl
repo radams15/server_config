@@ -51,6 +51,14 @@ sub posts {
 	sort {$$b[1]{Published} cmp $$a[1]{Published}} @out; # Return sorted by publish date.
 }
 
+sub linkify_imgs {
+    my ($data) = @_;
+    
+    $data =~ s:<img.*?src="(.*?)".*?>:<a href="$1">$&</a>:mg;
+    
+    $data;
+}
+
 sub load_post {
 	my ($fname) = @_;
 	
@@ -92,17 +100,17 @@ sub load_post {
 				class => 'post_body centre_page',
 			},
 			$infobar,
-			markdown($data, {
+			&linkify_imgs(markdown($data, {
 				empty_element_suffix => '>',
 				tab_width => 2
-			})
+			})),
 		);
 	} elsif($fname =~ /\.html/) {
 		return $infobar, div(
 			{
 				class => 'post_body centre_page',
 			},
-			$data
+			&linkify_imgs($data),
 		);
 	}
 	
