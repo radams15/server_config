@@ -14,6 +14,8 @@ my $POST_DIR = "posts";
 use Data::Dumper;
 
 sub posts {
+	my @tags = @_;
+	
 	my @out;
 	
 	for (<$POST_DIR/*.{md,html}>) {
@@ -23,14 +25,24 @@ sub posts {
 		my %conf;
 		until((my $line = <FH>) =~ /^----*/) {
 			next unless $line =~ /.*:.*/g; # Skip unless there is key: value
-			
+						
 			my ($k, $v) = split /:\s*/, $line;
 			$conf{$k} = $v;
 		}
 		
 		$conf{Tags} = [split ',\s*', $conf{Tags}];
 		
-		push @out, [$fname, \%conf];
+		if(@tags) {
+			for my $tag (@{$conf{Tags}}) {
+				chomp $tag;
+				if (grep {$_ eq $tag} @tags) {
+					push @out, [$fname, \%conf];
+					last;
+				}
+			}
+		} else {
+			push @out, [$fname, \%conf];
+		}
 		
 		close FH;
 	}
@@ -55,6 +67,7 @@ sub load_post {
 		my ($k, $v) = split /:\s*/, $line;
 		$conf{$k} = $v;
 	}
+	$conf{Tags} = [split ',\s*', $conf{Tags}];
 	my $data = join '', <FH>;
 	close FH;
 	
@@ -62,7 +75,15 @@ sub load_post {
 		{
 			class => 'post_infobar'
 		},
-		"Published: $conf{Published}<br>Tags: $conf{Tags}",
+		p("Published: $conf{Published}"), "Tags: ", (map {
+			a(
+				{
+					class => 'topic_round',
+					href => "/blog.pl?tags=$_",
+				},
+				$_
+			)
+		} @{$conf{Tags}}),
 	);
 	
 	if($fname =~ /\.md$/) {
@@ -110,15 +131,16 @@ sub page {
 							"$$_[1]{Title} - $$_[1]{Published}",
 						),
 						map {
-							p(
+							a(
 								{
 									class => 'topic_round',
+									href => "/blog.pl?tags=$_"
 								},
 								$_
 							)
 						} @{$$_[1]{Tags}},
 					)
-				} &posts,
+				} &posts(split /,\s*/, param('tags')),
 			),
 		),
 	);
