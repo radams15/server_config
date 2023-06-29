@@ -15,7 +15,7 @@ sub titlepage {
 			h1({ class=>'centre' }, 'Rhys Adams'),
 			txt("I'm Rhys - I study BSc Cyber Security at the University of Warwick."),
 			txt("I enjoy reverse engineering and low-level programming."),
-			txt("My GPG key is available", a({href=>'/radams.pgp'}, 'here'), ". (A53C 328F 5CA7 D1EA 4E16  0A58 C783 AD16 F241 1208)"),
+			txt("My GPG key is available", a({href=>'/radams.pgp'}, 'here'), '(', code('A53C 328F 5CA7 D1EA 4E16  0A58 C783 AD16 F241 1208'), ')'),
 		),
 	);
 }

@@ -1,5 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville&family=Philosopher&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Vollkorn&display=swap');
+
 html {
 	background-color: var(--base3);
+	font-family: 'Vollkorn', serif;
 }
 
 @media screen and (min-width: 601px) {
@@ -10,7 +14,6 @@ html {
     }
 }
 
-/* If the screen size is 600px wide or less, set the font-size of <div> to 30px */
 @media screen and (max-width: 600px) {
     :root {
         --h1: 3em;
@@ -37,8 +40,14 @@ html {
 	border-radius: 5px;
 }
 
-h2 {
+h1 {
 	color: var(--base0);
+    font-family: 'Libre Baskerville', serif;
+}
+
+h2 {
+	color: var(--base1);
+	font-family: 'Libre Baskerville', serif;
 }
 
 .text {
