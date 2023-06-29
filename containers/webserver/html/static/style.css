@@ -50,6 +50,11 @@ h2 {
 	font-family: 'Libre Baskerville', serif;
 }
 
+a {
+	font-size: var(--text);
+	color: var(--base0);
+}
+
 .text {
 	font-size: var(--text);
 	color: var(--base0);
