@@ -1,9 +1,9 @@
-Title: Connecting a vintage laptop to the internet.
-Tags: vintage computers, website
+Title: Connecting a vintage laptop to WiFi
+Tags: vintage computers, 200CDS
 Published: 28/06/2023
 
 ---
-# Connecting a vintage laptop to the internet
+# Connecting a vintage laptop to WiFi
 
 It was only recently that I began collecting truly vintage computers. For a while I had quite a few laptops from the early 2000s such
 as Powerbooks, iBooks and later Thinkpads, but at the beginning of the year I purchased a very old Toshiba 3100e - a luggable from 1987 which

@@ -1,0 +1,15 @@
+.post_body {
+	margin-top: 1em;
+	font-size: 1.2em;
+	border: 1px solid var(--red);
+	color: var(--base0);
+}
+
+.post_body img {
+	width: 60%;
+}
+
+.post_body code {
+	background-color: var(--base2);
+	padding: 2px;
+}

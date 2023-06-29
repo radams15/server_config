@@ -22,6 +22,8 @@ my %MENU = (
 );
 my @order = qw/ Home About Blog Links /;
 
+my @stylesheets = qw: static/solarized.css static/style.css static/dropdown.css static/post.css :;
+
 sub page_head {
 	my ($title) = @_;
 	
@@ -29,21 +31,13 @@ sub page_head {
 	
 	(
 		title($title),
-		Link({
-		  rel   => 'stylesheet',
-		  type  => 'text/css',
-		  href   => 'static/solarized.css',
-		}),
-		Link({
-		  rel   => 'stylesheet',
-		  type  => 'text/css',
-		  href   => 'static/style.css',
-		}),
-		Link({
-		  rel   => 'stylesheet',
-		  type  => 'text/css',
-		  href   => 'static/dropdown.css',
-		}),
+		map {
+			Link({
+			  rel   => 'stylesheet',
+			  type  => 'text/css',
+			  href   => $_,
+			})
+		} @stylesheets,
 	);
 }
 
