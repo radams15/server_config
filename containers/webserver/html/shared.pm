@@ -83,7 +83,7 @@ sub navbar {
 	(
 		div({
 			class => 'navbar',
-			id => 'main_nav',
+			id => 'main_nav centre',
 		}, 
 		&navbar_items(\%MENU, \@order),
 		a({href=>"javascript:void(0);", class => 'icon', onclick => 'onDropDown()'}, 'Menu'),
@@ -98,6 +98,20 @@ sub txt {
 }
 
 sub footer {
+    div(
+        {
+            class => 'footer',
+        },
+        
+        img(
+            {
+                src => 'static/images/powered-by-perl.png',
+                alt => 'Powered by Perl',
+                width => '100px',
+            }
+        ),
+        p({style=>'font-size: 10;'}, 'The Perl logo is a trademark of the Perl Foundation'),
+    ), 
 	script('function onDropDown() {
   var x = document.getElementById("main_nav");
   if (x.className === "navbar") {
@@ -105,7 +119,7 @@ sub footer {
   } else {
     x.className = "navbar";
   }
-} ');
+}');
 }
 
 1;

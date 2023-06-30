@@ -1,6 +1,7 @@
 .navbar {
 	background-color: var(--base2);
-	width: 100%;
+	width: calc(100% - 2*(10px));
+	margin: 10px;
 	overflow: hidden;
 	border-radius: 5px;
 	border: 1px solid var(--green);

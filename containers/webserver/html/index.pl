@@ -10,7 +10,7 @@ print CGI::header("text/html;charset=UTF-8");
 sub titlepage {
 	(
 		div({
-				class => 'title centre'
+				class => 'title'
 			},
 			h1({ class=>'centre' }, 'Rhys Adams'),
 			txt("I'm Rhys - I study BSc Cyber Security at the University of Warwick."),
