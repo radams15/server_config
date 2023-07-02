@@ -169,7 +169,7 @@ sub page {
 }
 
 sub index_body {
-	(
+	div( { id => 'container' },
 		&navbar,
 		&page,
 		&footer,
@@ -179,7 +179,7 @@ sub index_body {
 sub post_body {
 	my ($post_name) = @_;
 	
-	(
+	div( { id => 'container' },
 		&navbar,
 		&load_post($post_name),
 		&footer,

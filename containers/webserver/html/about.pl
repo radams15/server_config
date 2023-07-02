@@ -72,7 +72,7 @@ sub page {
 }
 
 sub page_body {
-	(
+	div( { id => 'container' },
 		&navbar,
 		&page,
 		&footer,
