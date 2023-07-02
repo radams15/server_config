@@ -1,0 +1,12 @@
+-l=120 # max line length
+-i=4 # indent level
+-ci=4 # continuation indent
+-ce # cuddled else
+-bar # opening brace on right even with long lines
+-sbt=2 # no bracket spacing
+-bt=0 # no brace spacing
+-bbt=1 # code block spacing sometimes
+-sfp # paren spacing on function call
+-skp # as above with builtins
+-nolq # indent wrapped text
+-nlop
