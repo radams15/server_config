@@ -41,6 +41,30 @@ But here is the same in Perl:
 
 Whilst some may disagree, this to me seems so much more natural to read, and the inbuilt regex handling is so much better than any compiled language or Python.
 
+## Regex support
+
+Perl is based around the use of regular expressions. They are a first class citizen in the Perl world.
+
+#### If statements
+
+If statements can be used to find whether there is a match to a string, for example:
+
+	my $str = "my name is Geoff";
+
+	if($str =~ /my name is (.*)/g) {
+		print "Name: $1\n";
+	}
+
+`$1` refers to the first group, `$2` the second and so on.
+#### While loops
+
+While loops can be used to repeat for every match, for example:
+
+	my $str = "i 'hope' you have a nice 'day'";
+	while($str =~ /'([^']*)'/g) {
+		print "Quoted: $1\n";
+	}
+
 ## Syntactic Sugar
 
 Perl has a lot of syntactic sugar, which when unfamiliar with can cause a bit of trouble, but once one has become accustomed to it it becomes extremely useful.

@@ -59,6 +59,23 @@ sub linkify_imgs {
     $data;
 }
 
+sub md2html {
+    my $out = markdown($_[0], {
+		empty_element_suffix => '>',
+		tab_width => 2
+	});
+	
+	$out =~ s/<code>/<code class="prettyprint">/g;
+	$out = &linkify_imgs($out);
+	
+	$out, script(
+	    {
+	        src => 'https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js',
+	    },
+	    ''
+	);
+}
+
 sub load_post {
 	my ($fname) = @_;
 	
@@ -100,10 +117,7 @@ sub load_post {
 				class => 'post_body centre_page',
 			},
 			$infobar,
-			&linkify_imgs(markdown($data, {
-				empty_element_suffix => '>',
-				tab_width => 2
-			})),
+			&md2html($data),
 		);
 	} elsif($fname =~ /\.html/) {
 		return $infobar, div(
