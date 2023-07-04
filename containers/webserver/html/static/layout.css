@@ -11,7 +11,7 @@ h1, p {
 }
 
 .wrapper {
-  max-width: 940px;
+  max-width: 90%;
   margin: 0 20px;
   display: grid;
   grid-gap: 10px;
@@ -22,12 +22,12 @@ h1, p {
   /* no grid support? */
   .sidebar {
     float: left;
-    width: 19.1489%;
+    width: 15%;
   }
 
   .content {
     float: right;
-    width: 79.7872%;
+    width: 85%;
   }
 
   .wrapper {
