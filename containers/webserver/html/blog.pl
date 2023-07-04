@@ -11,8 +11,6 @@ print &http_header;
 
 my $POST_DIR = "posts";
 
-use Data::Dumper;
-
 sub posts {
     my @tags = @_;
 

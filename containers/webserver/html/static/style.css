@@ -92,7 +92,7 @@ li, li a {
 .footer {
     background-color: var(--base2);
     position:absolute;
-    bottom: 0;
+    bottom: -100px;
     width: calc(100% - 2*(10px));
     height:60px;
     padding: 10px;
