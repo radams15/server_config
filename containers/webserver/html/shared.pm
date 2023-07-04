@@ -22,7 +22,8 @@ my %MENU = (
 );
 my @order = qw/ Home About Blog Links /;
 
-my @stylesheets = qw: static/solarized.css static/style.css static/dropdown.css static/post.css :;
+my @stylesheets =
+  qw: static/solarized.css static/style.css static/dropdown.css static/post.css :;
 
 sub page_head {
     my ($title) = @_;
@@ -30,45 +31,42 @@ sub page_head {
     $title = 'UNKNOWN TITLE' unless $title;
 
     (
-        title ($title),
-        map { Link ( { rel => 'stylesheet', type => 'text/css', href => $_, } ) } @stylesheets,
+        title($title),
+        map { Link({ rel => 'stylesheet', type => 'text/css', href => $_, }) }
+          @stylesheets,
     );
 }
 
 sub navbar_items {
-    my ( $links, $order ) = @_;
+    my ($links, $order) = @_;
     my @out;
 
     for (@$order) {
-        my $val = $$links{ $_ };
+        my $val = $$links{$_};
 
-        if ( ref $val eq 'HASH' ) {
+        if (ref $val eq 'HASH') {
             push @out,
-                div (
-                {
+              div({
                     class => 'dropdown'
                 },
-                div (
-                    {
+                div({
                         class => 'dropbtn'
                     },
                     $_,
                 ),
-                div (
-                    {
+                div({
                         class => 'dropdown-content'
                     },
-                    &navbar_items ( $val, [sort keys %$val] ),
+                    &navbar_items($val, [sort keys %$val]),
                 )
-                );
+              );
         } else {
             push @out,
-                a (
-                {
+              a({
                     href => $val
                 },
                 $_,
-                );
+              );
         }
     }
 
@@ -77,20 +75,24 @@ sub navbar_items {
 
 sub navbar {
     (
-        div (
-            {
+        div({
                 class => 'navbar',
                 id    => 'main_nav',
             },
-            &navbar_items ( \%MENU, \@order ),
-            a ( { href => "javascript:void(0);", class => 'icon', onclick => 'onDropDown()' }, 'Menu' ),
+            &navbar_items(\%MENU, \@order),
+            a({
+                    href    => "javascript:void(0);",
+                    class   => 'icon',
+                    onclick => 'onDropDown()'
+                },
+                'Menu'
+            ),
         ),
     );
 }
 
 sub txt {
-    p (
-        {
+    p({
             class => 'text'
         },
         @_
@@ -98,13 +100,12 @@ sub txt {
 }
 
 sub footer {
-    div (
-        {
+    div({
             class => 'footer',
         },
-        txt ( 'Copyright Rhys Adams, 2022-'.( 1900 + (localtime)[5]) ),
-        ),
-        script (
+        txt('Copyright Rhys Adams, 2022-' . (1900 + (localtime)[5])),
+      ),
+      script(
         'function onDropDown() {
   var x = document.getElementById("main_nav");
   if (x.className === "navbar") {
@@ -113,11 +114,10 @@ sub footer {
     x.className = "navbar";
   }
 }'
-        );
+      );
 }
 
-
 sub http_header {
-    CGI::header ("text/html;charset=UTF-8");
+    CGI::header("text/html;charset=UTF-8");
 }
 1;

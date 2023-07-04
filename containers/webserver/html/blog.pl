@@ -19,23 +19,23 @@ sub posts {
     my @out;
 
     for (<$POST_DIR/*.{md,html}>) {
-        ( my $fname = $_ ) =~ s:$POST_DIR/::g;
+        (my $fname = $_) =~ s:$POST_DIR/::g;
 
         open FH, '<', $_;
         my %conf;
-        until ( ( my $line = <FH> ) =~ /^----*/ ) {
+        until ((my $line = <FH>) =~ /^----*/) {
             next unless $line =~ /.*:.*/g;    # Skip unless there is key: value
 
-            my ( $k, $v ) = split /:\s*/, $line;
-            $conf{ $k } = $v;
+            my ($k, $v) = split /:\s*/, $line;
+            $conf{$k} = $v;
         }
 
-        $conf{ Tags } = [split ',\s*', $conf{ Tags }];
+        $conf{Tags} = [split ',\s*', $conf{Tags}];
 
         if (@tags) {
-            for my $tag ( @{ $conf{ Tags } } ) {
+            for my $tag (@{ $conf{Tags} }) {
                 chomp $tag;
-                if ( grep { $_ eq $tag } @tags ) {
+                if (grep { $_ eq $tag } @tags) {
                     push @out, [$fname, \%conf];
                     last;
                 }
@@ -45,9 +45,10 @@ sub posts {
         }
 
         close FH;
-    }
 
-    sort { $$b[1]{ Published } cmp $$a[1]{ Published } } @out;    # Return sorted by publish date.
+    }
+    sort { $$b[1]{Published} cmp $$a[1]{Published} }
+      @out;    # Return sorted by publish date.
 }
 
 sub linkify_imgs {
@@ -59,7 +60,7 @@ sub linkify_imgs {
 }
 
 sub md2html {
-    my $out = markdown (
+    my $out = markdown(
         $_[0],
         {
             empty_element_suffix => '>',
@@ -68,15 +69,15 @@ sub md2html {
     );
 
     $out =~ s/<code>/<code class="prettyprint">/g;
-    $out = &linkify_imgs ($out);
+    $out = &linkify_imgs($out);
 
     $out,
-        script (
-        {
-            src => 'https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js',
+      script({
+            src =>
+'https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js',
         },
         ''
-        );
+      );
 }
 
 sub load_post {
@@ -86,93 +87,101 @@ sub load_post {
 
     $fname = "$POST_DIR/$fname";
 
-    open FH, '<', $fname or return h1 ("Unknown post!");
+    open FH, '<', $fname or return h1("Unknown post!");
 
     my %conf;
-    until ( ( my $line = <FH> ) =~ /^----*/ ) {
+    until ((my $line = <FH>) =~ /^----*/) {
         next unless $line =~ /.*:.*/g;    # Skip unless there is key: value
 
-        my ( $k, $v ) = split /:\s*/, $line;
-        $conf{ $k } = $v;
+        my ($k, $v) = split /:\s*/, $line;
+        $conf{$k} = $v;
     }
-    $conf{ Tags } = [split ',\s*', $conf{ Tags }];
+    $conf{Tags} = [split ',\s*', $conf{Tags}];
     my $data = join '', <FH>;
     close FH;
 
-    my $infobar = div (
-        {
+    my $infobar = div({
             class => 'post_infobar'
         },
-        p ("Published: $conf{Published}"),
+        p("Published: $conf{Published}"),
         "Tags: ",
-        ( map { a ( { class => 'topic_round', href => "/blog.pl?tags=$_", }, $_ ) } @{ $conf{ Tags } } ),
+        (
+            map {
+                a({ class => 'topic_round', href => "/blog.pl?tags=$_", }, $_)
+            } @{ $conf{Tags} }
+        ),
     );
 
-    if ( $fname =~ /\.md$/ ) {
-        return div (
-            {
+    if ($fname =~ /\.md$/) {
+        return div({
                 class => 'post_body centre_page',
             },
             $infobar,
-            &md2html ($data),
+            &md2html($data),
         );
-    } elsif ( $fname =~ /\.html/ ) {
+    } elsif ($fname =~ /\.html/) {
         return $infobar,
-            div (
-            {
+          div({
                 class => 'post_body centre_page',
             },
-            &linkify_imgs ($data),
-            );
+            &linkify_imgs($data),
+          );
     }
 
-    return h1 ("Unknown post type!");
+    return h1("Unknown post type!");
 }
 
 sub page {
     (
-        div (
-            {
+        div({
                 class => 'title centre'
             },
 
-            h1 ( { class => 'centre' }, 'Blog Posts' ),
+            h1({ class => 'centre' }, 'Blog Posts'),
         ),
 
-        div (
-            {
+        div({
                 class => 'centre_page'
             },
-            ul (
+            ul(
                 map {
-                    li (
-                        a (
-                            {
+                    li(
+                        a({
                                 href => "/blog.pl?post=$$_[0]",
                             },
                             "$$_[1]{Title} - $$_[1]{Published}",
                         ),
-                        map { a ( { class => 'topic_round', href => "/blog.pl?tags=$_" }, $_ ) } @{ $$_[1]{ Tags } },
+                        map {
+                            a({
+                                    class => 'topic_round',
+                                    href  => "/blog.pl?tags=$_"
+                                },
+                                $_
+                            )
+                        } @{ $$_[1]{Tags} },
                     )
-                } &posts ( split /,\s*/, param ('tags') ),
+                } &posts(split /,\s*/, param('tags')),
             ),
         ),
     );
 }
 
 sub index_body {
-    div ( { id => 'container' }, &navbar, &page, &footer, );
+    div({ id => 'container' }, &navbar, &page, &footer,);
 }
 
 sub post_body {
     my ($post_name) = @_;
 
-    div ( { id => 'container' }, &navbar, &load_post ($post_name), &footer, );
+    div({ id => 'container' }, &navbar, &load_post($post_name), &footer,);
 }
 
-if ( my $post_name = param ('post') ) {
-    print html ( CGI::head ( &page_head ( 'Rhys Adams - ' . param ('post') ) ),
-        CGI::body ( &post_body ($post_name) ), );
+if (my $post_name = param('post')) {
+    print html (
+        CGI::head(&page_head('Rhys Adams - ' . param('post'))),
+        CGI::body(&post_body($post_name)),
+    );
 } else {
-    print html ( CGI::head ( &page_head ('Rhys Adams - Blog') ), CGI::body (&index_body), );
+    print html (CGI::head(&page_head('Rhys Adams - Blog')),
+        CGI::body(&index_body),);
 }
