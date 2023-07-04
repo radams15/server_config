@@ -80,7 +80,7 @@ sub navbar {
         div (
             {
                 class => 'navbar',
-                id    => 'main_nav centre',
+                id    => 'main_nav',
             },
             &navbar_items ( \%MENU, \@order ),
             a ( { href => "javascript:void(0);", class => 'icon', onclick => 'onDropDown()' }, 'Menu' ),
