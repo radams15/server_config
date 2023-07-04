@@ -6,12 +6,6 @@ html {
 	font-family: 'Vollkorn', serif;
 }
 
-html, body {
-    margin:0;
-    padding:0;
-    height:100%;
-}
-
 @media screen and (min-width: 601px) {
     :root {
         --h1: 3em;
@@ -87,15 +81,6 @@ li, li a {
 	padding: 2px;
 	font-size: .7em;
 	display: inline;
-}
-
-.footer {
-    background-color: var(--base2);
-    position:absolute;
-    bottom: 0;
-    width: calc(100% - 2*(10px));
-    height:60px;
-    padding: 10px;
 }
 
 .footer * {

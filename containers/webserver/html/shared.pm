@@ -2,7 +2,7 @@ use CGI ':standard';
 
 use Exporter 'import';
 
-our @EXPORT_OK = qw/ page_head navbar footer txt/;
+our @EXPORT_OK = qw/ page_head navbar footer txt page/;
 
 my %MENU = (
     Home  => '/',
@@ -22,7 +22,32 @@ my %MENU = (
 );
 my @order = qw/ Home About Blog Links /;
 
-my @stylesheets = qw: static/solarized.css static/style.css static/dropdown.css static/post.css :;
+my @stylesheets = qw: static/solarized.css static/style.css static/layout.css static/dropdown.css static/post.css :;
+
+sub page {
+    my ($header, $content, $sidebar, $footer) = @_;
+    
+    div(
+        {class => 'wrapper'},
+        
+        div(
+            {class => 'header'},
+            $header
+        ),
+        div(
+            {class => 'sidebar'},
+            $sidebar
+        ),
+        div(
+            {class => 'content'},
+            $content
+        ),
+        div(
+            {class => 'footer'},
+            $footer
+        )
+    );
+}
 
 sub page_head {
     my ($title) = @_;
@@ -99,9 +124,6 @@ sub txt {
 
 sub footer {
     div (
-        {
-            class => 'footer',
-        },
         txt ( 'Copyright Rhys Adams, 2022-'.( 1900 + (localtime)[5]) ),
         ),
         script (

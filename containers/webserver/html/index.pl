@@ -11,9 +11,9 @@ sub titlepage {
     (
         div (
             {
-                class => 'title centre_page'
+                class => ''
             },
-            h1 ( { class => 'centre' }, 'Rhys Adams' ),
+            h1 ( { class => '' }, 'Rhys Adams' ),
             txt ("I'm Rhys - I study BSc Cyber Security at the University of Warwick."),
             txt ("I enjoy reverse engineering and low-level programming."),
             txt (
@@ -26,7 +26,7 @@ sub titlepage {
 }
 
 sub page_body {
-    div ( { id => 'container' }, &navbar, &titlepage, &footer, );
+    page(&navbar, &titlepage, div(p()), &footer);
 }
 
 print html ( CGI::head ( &page_head ('Rhys Adams') ), CGI::body (&page_body), );

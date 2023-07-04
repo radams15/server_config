@@ -129,7 +129,7 @@ sub load_post {
     return h1 ("Unknown post type!");
 }
 
-sub page {
+sub posts_page {
     (
         div (
             {
@@ -161,13 +161,13 @@ sub page {
 }
 
 sub index_body {
-    div ( { id => 'container' }, &navbar, &page, &footer, );
+    page(&navbar, div(&posts_page), div(p()), &footer);
 }
 
 sub post_body {
     my ($post_name) = @_;
-
-    div ( { id => 'container' }, &navbar, &load_post ($post_name), &footer, );
+    
+    page(&navbar, div(&load_post ($post_name)), div(p()), &footer);
 }
 
 if ( my $post_name = param ('post') ) {
