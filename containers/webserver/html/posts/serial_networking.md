@@ -56,17 +56,12 @@ Dosppp was an easy setup. The command to run start it is simply: `epppd com1 192
 
 In the `C:\mtcp` folder I edited mtcp.cfg to read the following: 
 
-`PACKETINT 0x60` - the packet interrupt I was given
-
-`HOSTNAME BIGBRICK`
-
-`IPADDR 10.0.1.2`
-
-`NETMASK 255.255.255.0`
-
-`GATEWAY 10.0.1.1`
-
-`NAMESERVER 1.1.1.1`
+	PACKETINT 0x60 - the packet interrupt I was given
+	HOSTNAME BIGBRICK
+	IPADDR 10.0.1.2
+	NETMASK 255.255.255.0
+	GATEWAY 10.0.1.1
+	NAMESERVER 1.1.1.1
 
 ![mtcp.cfg](static/images/serial_networking/mtcpcfg.jpg)
 

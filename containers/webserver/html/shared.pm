@@ -2,7 +2,7 @@ use CGI ':standard';
 
 use Exporter 'import';
 
-our @EXPORT_OK = qw/ page_head navbar footer txt/;
+our @EXPORT_OK = qw/ page_head navbar footer txt http_header/;
 
 my %MENU = (
     Home  => '/',
@@ -116,4 +116,8 @@ sub footer {
         );
 }
 
+
+sub http_header {
+    CGI::header ("text/html;charset=UTF-8");
+}
 1;

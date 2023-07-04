@@ -5,7 +5,7 @@ use CGI ':standard';
 use lib '.';
 use shared ();
 
-print CGI::header ("text/html;charset=UTF-8");
+print &http_header;
 
 sub li_a {
     my ( $name, $url ) = @_;

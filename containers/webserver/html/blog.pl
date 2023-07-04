@@ -7,7 +7,7 @@ use Text::Markdown qw/ markdown /;
 use lib '.';
 use shared ();
 
-print CGI::header ("text/html;charset=UTF-8");
+print &http_header;
 
 my $POST_DIR = "posts";
 

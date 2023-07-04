@@ -80,19 +80,13 @@ satellite using a floppy.
 
 We then create a file named `mtcp.cfg` with the following contents:
 
-`PACKETINT 0x62`
-
-`HOSTNAME Satellite`
-
-`DOMAIN lan`
-
-`IPADDR 10.0.0.153`
-
-`NETMASK 255.255.255.0`
-
-`GATEWAY 10.0.0.1`
-
-`NAMESERVER 10.0.0.1`
+	PACKETINT 0x62
+	HOSTNAME Satellite
+	DOMAIN lan
+	IPADDR 10.0.0.153
+	NETMASK 255.255.255.0
+	GATEWAY 10.0.0.1
+	NAMESERVER 10.0.0.1
 
 ![mTCP.cfg](static/images/vintage_internet/mtcp.jpg)
 
