@@ -2,7 +2,7 @@ use CGI ':standard';
 
 use Exporter 'import';
 
-our @EXPORT_OK = qw/ page_head navbar footer txt http_header/;
+our @EXPORT_OK = qw/ page_head navbar footer txt http_header page /;
 
 my %MENU = (
     Home  => '/',
@@ -76,8 +76,7 @@ sub navbar_items {
 sub navbar {
     (
         div({
-                class => 'navbar',
-                id    => 'main_nav',
+                id    => 'main_nav'
             },
             &navbar_items(\%MENU, \@order),
             a({
@@ -99,13 +98,20 @@ sub txt {
     );
 }
 
+sub header {
+    h1({id => 'header_title'},
+        'Rhys Adams'
+    ),
+    p({id => 'motto'},
+        'Vintage computing, cyber security and other interesting stuff.'
+    )
+}
+
 sub footer {
-    div({
-            class => 'footer',
-        },
+    div(
         txt('Copyright Rhys Adams, 2022-' . (1900 + (localtime)[5])),
-      ),
       script(
+        {type => 'text/javascript'},
         'function onDropDown() {
   var x = document.getElementById("main_nav");
   if (x.className === "navbar") {
@@ -114,7 +120,30 @@ sub footer {
     x.className = "navbar";
   }
 }'
-      );
+      ));
+}
+
+sub page {
+    my %args = @_;
+    
+    div(
+        {class => 'page'},
+        div({class => 'header'},
+            $args{header} // &header
+        ),
+        div({class => 'navbar'},
+            $args{navbar} // &navbar
+        ),
+        div({class => 'sidebar'},
+            $args{sidebar} // p()
+        ),
+        div({class => 'content'},
+            $args{content} // p()
+        ),
+        div({class => 'footer'},
+            $args{footer} // &footer
+        )
+    );
 }
 
 sub http_header {

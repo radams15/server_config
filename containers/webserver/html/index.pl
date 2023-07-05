@@ -12,7 +12,6 @@ sub titlepage {
         div({
                 class => 'title centre_page'
             },
-            h1({ class => 'centre' }, 'Rhys Adams'),
             txt(
 "I'm Rhys - I study BSc Cyber Security at the University of Warwick."
             ),
@@ -29,7 +28,9 @@ sub titlepage {
 }
 
 sub page_body {
-    div({ id => 'container' }, &navbar, &titlepage, &footer,);
+    &page(
+        content => div(&titlepage),
+    );
 }
 
 print html (CGI::head(&page_head('Rhys Adams')), CGI::body(&page_body),);

@@ -13,7 +13,7 @@ sub li_a {
     li(a({ href => $url }, $name,));
 }
 
-sub page {
+sub content {
     (
         div({
                 class => 'title centre'
@@ -79,7 +79,9 @@ sub page {
 }
 
 sub page_body {
-    div({ id => 'container' }, &navbar, &page, &footer,);
+    &page(
+        content => div(&content),
+    );
 }
 
 print html (CGI::head(&page_head('Rhys Adams - About')), CGI::body(&page_body),

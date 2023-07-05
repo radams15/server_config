@@ -49,7 +49,7 @@ sub posts {
       @out;    # Return sorted by publish date.
 }
 
-sub page {
+sub content {
     (
         div({
                 class => 'title centre'
@@ -85,7 +85,9 @@ sub page {
 }
 
 sub index_body {
-    div({ id => 'container' }, &navbar, &page, &footer,);
+    &page(
+        content => div(&content),
+    );
 }
 
 print html (CGI::head(&page_head('Rhys Adams - Blog')),
