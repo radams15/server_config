@@ -79,9 +79,7 @@ sub content {
 }
 
 sub page_body {
-    &page(
-        content => div(&content),
-    );
+    &page(content => div(&content),);
 }
 
 print html (CGI::head(&page_head('Rhys Adams - About')), CGI::body(&page_body),

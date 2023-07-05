@@ -32,9 +32,14 @@ html, body {
 #motto {
     justify-content: flex-end;
     margin-left: auto;
-    margin-right: 0;
+    align-items: center;
     color: var(--nav_fg);
     max-width: 250px;
+}
+
+#copyright {
+    flex: 1;
+    text-align: right;
 }
 
 @media screen and (min-width: 601px) {
@@ -101,7 +106,6 @@ li, li a {
 }
 
 .topic_round {
-	xbackground-color: var(--yellow);
 	border-radius: 50%;
 	text-align: center;
 	color: var(--fg);
@@ -112,6 +116,8 @@ li, li a {
 }
 
 .footer {
+    display: flex;
+    align-items: center;
     background-color: var(--content_bg);
     height:60px;
     padding: 10px;
@@ -120,7 +126,6 @@ li, li a {
 }
 
 .footer * {
-    display: inline;
     margin-right: 20px;
     color: var(--nav_fg);
 }

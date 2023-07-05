@@ -1,17 +1,13 @@
 @media (prefers-color-scheme: dark) {
 	:root {
-		--base3: #002b36;
-		--base2: #073642;
-		--base1: #586e75;
-		--base0: #657b83;
-		--yellow: #b58900;
-		--orange: #cb4b16;
-		--red: #dc322f;
-		--magenta: #d33682;
-		--violet: #6c71c4;
-		--blue: #268bd2;
-		--cyan: #2aa198;
-		--green: #859900;
+	    --bg: #f1f1f1;
+	    --fg: black;
+	    --content_bg: white;
+	
+		--nav_bg: black;
+		--nav_bg_hover: #666;
+		--nav_fg: #abb8c3;
+		--nav_fg_hover: white;
 	}
 }
 

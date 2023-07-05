@@ -85,9 +85,7 @@ sub content {
 }
 
 sub index_body {
-    &page(
-        content => div(&content),
-    );
+    &page(content => div(&content),);
 }
 
 print html (CGI::head(&page_head('Rhys Adams - Blog')),

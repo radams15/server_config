@@ -6,10 +6,31 @@
 }
 
 .post_body img {
-	width: 60%;
+	width: 100%;
+}
+
+.post_body a {
+    display: block;
+	text-align: center;
 }
 
 .post_body code {
 	background-color: var(--base2);
 	padding: 2px;
+}
+
+.post_body figure {
+    width: 60%;
+    display: flex;
+    flex-flow: column;
+    padding: 5px;
+    margin: auto;
+}
+
+.post_body figcaption {
+    background-color: #222;
+    color: #fff;
+    font: italic smaller sans-serif;
+    padding: 10px;
+    text-align: center;
 }

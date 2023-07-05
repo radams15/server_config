@@ -14,7 +14,12 @@ my $POST_DIR = "posts";
 sub linkify_imgs {
     my ($data) = @_;
 
-    $data =~ s:<img.*?src="(.*?)".*?>:<a href="$1">$&</a>:mg;
+    $data =~ s:<img.*?src="(.*?)".*? alt="(.*?)".*?>:
+        <figure>
+            <a href="$1">$&</a>
+            <figcaption>$2</figcaption>
+        </figure>
+        :mg;
 
     $data;
 }
@@ -94,9 +99,7 @@ sub load_post {
 sub post_body {
     my ($post_name) = @_;
 
-    &page(
-        content => div(&load_post($post_name)),
-    );
+    &page(content => div(&load_post($post_name)),);
 }
 
 my $post_name = param('post');

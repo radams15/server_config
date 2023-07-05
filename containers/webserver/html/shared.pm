@@ -5,9 +5,10 @@ use Exporter 'import';
 our @EXPORT_OK = qw/ page_head navbar footer txt http_header page /;
 
 my %MENU = (
-    Home  => '/',
-    About => '/about.pl',
-    Links => {
+    Home     => '/',
+    About    => '/about.pl',
+    Projects => '/projects.pl',
+    Links    => {
         'Cloud'               => '/cloud/',
         'Jellyfin'            => '/jellyfin/',
         'Transmission'        => '/transmission',
@@ -18,9 +19,10 @@ my %MENU = (
         'Github'              => 'https://github.com/radams15',
         'Github (University)' => 'https://github.com/rhys-cyber',
     },
-    Blog => '/blog.pl',
+    Blog    => '/blog.pl',
+    Contact => '/contact.pl',
 );
-my @order = qw/ Home About Blog Links /;
+my @order = qw/ Home About Projects Blog Links Contact /;
 
 my @stylesheets =
   qw: static/solarized.css static/style.css static/dropdown.css static/post.css :;
@@ -76,7 +78,7 @@ sub navbar_items {
 sub navbar {
     (
         div({
-                id    => 'main_nav'
+                id => 'main_nav'
             },
             &navbar_items(\%MENU, \@order),
             a({
@@ -99,20 +101,18 @@ sub txt {
 }
 
 sub header {
-    h1({id => 'header_title'},
-        'Rhys Adams'
-    ),
-    p({id => 'motto'},
-        'Vintage computing, cyber security and other interesting stuff.'
-    )
+    h1({ id => 'header_title' }, 'Rhys Adams'),
+      p({ id => 'motto' },
+        'Vintage computing, cyber security and other interesting stuff.');
 }
 
 sub footer {
     div(
+        { id => 'copyright' },
         txt('Copyright Rhys Adams, 2022-' . (1900 + (localtime)[5])),
-      script(
-        {type => 'text/javascript'},
-        'function onDropDown() {
+        script(
+            { type => 'text/javascript' },
+            'function onDropDown() {
   var x = document.getElementById("main_nav");
   if (x.className === "navbar") {
     x.className += " responsive";
@@ -120,29 +120,20 @@ sub footer {
     x.className = "navbar";
   }
 }'
-      ));
+        )
+    );
 }
 
 sub page {
     my %args = @_;
-    
+
     div(
-        {class => 'page'},
-        div({class => 'header'},
-            $args{header} // &header
-        ),
-        div({class => 'navbar'},
-            $args{navbar} // &navbar
-        ),
-        div({class => 'sidebar'},
-            $args{sidebar} // p()
-        ),
-        div({class => 'content'},
-            $args{content} // p()
-        ),
-        div({class => 'footer'},
-            $args{footer} // &footer
-        )
+        { class => 'page' },
+        div({ class => 'header' },  $args{header}  // &header),
+        div({ class => 'navbar' },  $args{navbar}  // &navbar),
+        div({ class => 'sidebar' }, $args{sidebar} // p()),
+        div({ class => 'content' }, $args{content} // p()),
+        div({ class => 'footer' },  $args{footer}  // &footer)
     );
 }
 

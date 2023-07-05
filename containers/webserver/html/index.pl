@@ -28,9 +28,7 @@ sub titlepage {
 }
 
 sub page_body {
-    &page(
-        content => div(&titlepage),
-    );
+    &page(content => div(&titlepage),);
 }
 
 print html (CGI::head(&page_head('Rhys Adams')), CGI::body(&page_body),);
