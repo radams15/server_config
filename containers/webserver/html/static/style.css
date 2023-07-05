@@ -2,7 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Vollkorn&display=swap');
 
 html {
-	background-color: var(--base3);
+	background-color: var(--bg);
 	font-family: 'Vollkorn', serif;
 }
 
@@ -10,6 +10,15 @@ html, body {
     margin:0;
     padding:0;
     height:100%;
+}
+
+.page {
+    margin: 0 auto;
+    max-width: 900px;
+}
+
+.content {
+    background-color: var(--content_bg);
 }
 
 @media screen and (min-width: 601px) {
@@ -35,7 +44,7 @@ html, body {
 }
 
 .title {
-	color: var(--base0);
+	color: var(--fg);
 }
 
 .centre {
@@ -53,36 +62,33 @@ html, body {
 }
 
 h1 {
-	color: var(--base0);
+	color: var(--fg);
     font-family: 'Libre Baskerville', serif;
 }
 
 h2 {
-	color: var(--base1);
+	color: var(--fg);
 	font-family: 'Libre Baskerville', serif;
 }
 
 a {
-	font-size: var(--text);
-	color: var(--base0);
+	color: var(--fg);
 }
 
 .text {
-	font-size: var(--text);
-	color: var(--base0);
+	color: var(--fg);
 }
 
 li, li a {
-	font-size: var(--text);
 	padding: 5px;
-	color: var(--base0);
+	color: var(--fg);
 }
 
 .topic_round {
-	background-color: var(--yellow);
+	xbackground-color: var(--yellow);
 	border-radius: 50%;
 	text-align: center;
-	color: var(--base2);
+	color: var(--fg);
 	width: 5em;
 	padding: 2px;
 	font-size: .7em;
@@ -90,17 +96,17 @@ li, li a {
 }
 
 .footer {
-    background-color: var(--base2);
-    position:absolute;
-    bottom: -100px;
-    width: calc(100% - 2*(10px));
+    background-color: var(--content_bg);
     height:60px;
     padding: 10px;
+    border-radius: 10px;
+    margin-top: 30px;
 }
 
 .footer * {
     display: inline;
     margin-right: 20px;
+    color: var(--nav_fg);
 }
 
 script { display: none !important; }

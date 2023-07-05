@@ -98,6 +98,12 @@ sub txt {
     );
 }
 
+sub header {
+    div(
+        h1('Rhys Adams'),
+    );
+}
+
 sub footer {
     div(
         txt('Copyright Rhys Adams, 2022-' . (1900 + (localtime)[5])),
@@ -118,11 +124,12 @@ sub page {
     my %args = @_;
     
     div(
+        {class => 'page'},
         div({class => 'header'},
-            $args{header} // p()
+            $args{header} // &header
         ),
         div({class => 'navbar'},
-            $args{navbar} // &navbar,
+            $args{navbar} // &navbar
         ),
         div({class => 'sidebar'},
             $args{sidebar} // p()
