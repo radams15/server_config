@@ -12,7 +12,6 @@ sub titlepage {
         div({
                 class => 'title centre_page'
             },
-            h1({ class => 'centre' }, 'Rhys Adams'),
             txt(
 "I'm Rhys - I study BSc Cyber Security at the University of Warwick."
             ),

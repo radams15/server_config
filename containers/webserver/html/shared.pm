@@ -99,9 +99,12 @@ sub txt {
 }
 
 sub header {
-    div(
-        h1('Rhys Adams'),
-    );
+    h1({id => 'header_title'},
+        'Rhys Adams'
+    ),
+    p({id => 'motto'},
+        'Vintage computing, cyber security and other interesting stuff.'
+    )
 }
 
 sub footer {
