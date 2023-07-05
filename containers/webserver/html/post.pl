@@ -94,7 +94,9 @@ sub load_post {
 sub post_body {
     my ($post_name) = @_;
 
-    div({ id => 'container' }, &navbar, &load_post($post_name), &footer,);
+    &page(
+        content => div(&load_post($post_name)),
+    );
 }
 
 my $post_name = param('post');

@@ -2,7 +2,7 @@ use CGI ':standard';
 
 use Exporter 'import';
 
-our @EXPORT_OK = qw/ page_head navbar footer txt http_header/;
+our @EXPORT_OK = qw/ page_head navbar footer txt http_header page /;
 
 my %MENU = (
     Home  => '/',
@@ -76,8 +76,7 @@ sub navbar_items {
 sub navbar {
     (
         div({
-                class => 'navbar',
-                id    => 'main_nav',
+                id    => 'main_nav'
             },
             &navbar_items(\%MENU, \@order),
             a({
@@ -100,12 +99,10 @@ sub txt {
 }
 
 sub footer {
-    div({
-            class => 'footer',
-        },
+    div(
         txt('Copyright Rhys Adams, 2022-' . (1900 + (localtime)[5])),
-      ),
       script(
+        {type => 'text/javascript'},
         'function onDropDown() {
   var x = document.getElementById("main_nav");
   if (x.className === "navbar") {
@@ -114,7 +111,29 @@ sub footer {
     x.className = "navbar";
   }
 }'
-      );
+      ));
+}
+
+sub page {
+    my %args = @_;
+    
+    div(
+        div({class => 'header'},
+            $args{header} // p()
+        ),
+        div({class => 'navbar'},
+            $args{navbar} // &navbar,
+        ),
+        div({class => 'sidebar'},
+            $args{sidebar} // p()
+        ),
+        div({class => 'content'},
+            $args{content} // p()
+        ),
+        div({class => 'footer'},
+            $args{footer} // &footer
+        )
+    );
 }
 
 sub http_header {

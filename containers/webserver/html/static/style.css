@@ -102,3 +102,5 @@ li, li a {
     display: inline;
     margin-right: 20px;
 }
+
+script { display: none !important; }
