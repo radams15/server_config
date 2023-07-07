@@ -65,14 +65,14 @@ sub content {
                 map {
                     li(
                         a({
-                                href => "/post.pl?post=$$_[0]",
+                                href => "/post?post=$$_[0]",
                             },
                             "$$_[1]{Title} - $$_[1]{Published}",
                         ),
                         map {
                             a({
                                     class => 'topic_round',
-                                    href  => "/blog.pl?tags=$_"
+                                    href  => "/blog?tags=$_"
                                 },
                                 $_
                             )

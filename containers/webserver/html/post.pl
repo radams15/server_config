@@ -72,7 +72,7 @@ sub load_post {
         "Tags: ",
         (
             map {
-                a({ class => 'topic_round', href => "/blog.pl?tags=$_", }, $_)
+                a({ class => 'topic_round', href => "/blog?tags=$_", }, $_)
             } @{ $conf{Tags} }
         ),
     );

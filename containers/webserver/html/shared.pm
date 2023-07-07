@@ -6,8 +6,8 @@ our @EXPORT_OK = qw/ page_head navbar footer txt http_header page /;
 
 my %MENU = (
     Home     => '/',
-    About    => '/about.pl',
-    Projects => '/projects.pl',
+    About    => '/about',
+    Projects => '/projects',
     Links    => {
         'Cloud'               => '/cloud/',
         'Jellyfin'            => '/jellyfin/',
@@ -19,8 +19,8 @@ my %MENU = (
         'Github'              => 'https://github.com/radams15',
         'Github (University)' => 'https://github.com/rhys-cyber',
     },
-    Blog    => '/blog.pl',
-    Contact => '/contact.pl',
+    Blog    => '/blog',
+    Contact => '/contact',
 );
 my @order = qw/ Home About Projects Blog Links Contact /;
 
