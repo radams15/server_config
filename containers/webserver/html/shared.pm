@@ -45,6 +45,7 @@ sub navbar_items {
 
     for (@$order) {
         my $val = $$links{$_};
+        my $current = $ENV{REQUEST_URI} eq $val;
 
         if (ref $val eq 'HASH') {
             push @out,
@@ -65,7 +66,8 @@ sub navbar_items {
         } else {
             push @out,
               a({
-                    href => $val
+                    href => $val,
+                    class => ($current? 'nav_selected' : ''),
                 },
                 $_,
               );
