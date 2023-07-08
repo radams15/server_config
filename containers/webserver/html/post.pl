@@ -65,45 +65,44 @@ sub load_post {
     my $data = join '', <FH>;                  # Read the rest of the data
     close FH;
 
-    my $infobar = div({    # Make info bar
+    my $infobar = div({    # Make info bar with publish date, topics
             class => 'post_infobar'
         },
         p("Published: $conf{Published}"),
         "Tags: ",
         (
             map { a({ class => 'topic_round', href => "/blog?tags=$_", }, $_) }
-              @{ $conf{Tags} }
+              @{ $conf{Tags} } # Add a topic filter link for every listed topic.
         ),
     );
 
     if ($fname =~ /\.md$/) {
-        return div({
+        return div({    # Convert markdown to html before displaying.
                 class => 'post_body centre_page',
             },
             $infobar,
             &md2html($data),
         );
     } elsif ($fname =~ /\.html/) {
-        return $infobar,
-          div({
+        return $infobar, div({    # Display html directly if is an html file.
                 class => 'post_body centre_page',
             },
-            &linkify_imgs($data),
-          );
+            $data,
+        );
     }
 
-    return h1("Unknown post type!");
+    return h1("Unknown post type!");    # Not html or markdown, show an error.
 }
 
 sub post_body {
     my ($post_name) = @_;
 
-    &page(content => div(&load_post($post_name)),);
+    &page(content => div(&load_post($post_name)));
 }
 
 my $post_name = param('post');
 
 print html (
     CGI::head(&page_head('Rhys Adams - ' . param('post'))),
-    CGI::body(&post_body($post_name)),
+    CGI::body(&post_body($post_name))
 );

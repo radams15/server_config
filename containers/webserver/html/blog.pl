@@ -27,11 +27,14 @@ sub posts {
             my ($k, $v) = split /:\s*/, $line;
             $conf{$k} = $v;
         }
+        close FH;
 
-        $conf{Tags} = [split ',\s*', $conf{Tags}];
+        $conf{Tags} = [split ',\s*', $conf{Tags}]
+          ;    # Split the tags string by comma into a list.
 
         if (@tags) {
-            for my $tag (@{ $conf{Tags} }) {
+            for my $tag (@{ $conf{Tags} })
+            {    # Show only relevant tags if specified.
                 chomp $tag;
                 if (grep { $_ eq $tag } @tags) {
                     push @out, [$fname, \%conf];
@@ -41,8 +44,6 @@ sub posts {
         } else {
             push @out, [$fname, \%conf];
         }
-
-        close FH;
 
     }
     sort { $$b[1]{Published} cmp $$a[1]{Published} }
@@ -66,6 +67,7 @@ sub content {
                 },
                 Tr(th('Title'), th('Published'), th('Tags'),),
                 map {
+# For every tag make a table row with the link/name, publish date, and the topic filters.
                     Tr(
                         td(a({
                                 href => "/post?post=$$_[0]",
@@ -91,8 +93,7 @@ sub content {
 }
 
 sub index_body {
-    &page(content => div(&content),);
+    &page(content => div(&content));
 }
 
-print html (CGI::head(&page_head('Rhys Adams - Blog')),
-    CGI::body(&index_body),);
+print html (CGI::head(&page_head('Rhys Adams - Blog')), CGI::body(&index_body));

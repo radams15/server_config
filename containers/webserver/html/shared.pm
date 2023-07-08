@@ -35,7 +35,7 @@ sub page_head {
     (
         title($title),
         map { Link({ rel => 'stylesheet', type => 'text/css', href => $_, }) }
-          @stylesheets,
+          @stylesheets,    # Link to all the stylesheets
     );
 }
 
@@ -44,10 +44,10 @@ sub navbar_items {
     my @out;
 
     for (@$order) {
-        my $val = $$links{$_};
+        my $val     = $$links{$_};
         my $current = $ENV{REQUEST_URI} eq $val;
 
-        if (ref $val eq 'HASH') {
+        if (ref $val eq 'HASH') { # Make a dropdown menu as shown by W3 schools.
             push @out,
               div({
                     class => 'dropdown'
@@ -63,14 +63,14 @@ sub navbar_items {
                     &navbar_items($val, [sort keys %$val]),
                 )
               );
-        } else {
-            push @out,
-              a({
-                    href => $val,
-                    class => ($current? 'nav_selected' : ''),
+        } else {    # Otherwise add a link to the item.
+            push @out, a({
+                    href  => $val,
+                    class => ($current ? 'nav_selected' : '')
+                    ,    # If the url is the same as current one highlight it.
                 },
                 $_,
-              );
+            );
         }
     }
 
@@ -86,7 +86,8 @@ sub navbar {
             a({
                     href    => "javascript:void(0);",
                     class   => 'icon',
-                    onclick => 'onDropDown()'
+                    onclick =>
+                      'onDropDown()' # Collapsed menu button calls function to show the menu.
                 },
                 'Menu'
             ),
@@ -103,13 +104,14 @@ sub txt {
 }
 
 sub header {
-    h1({ id => 'header_title' }, 'Rhys Adams'),
+    h1({ id => 'header_title' }, 'Rhys Adams')
+      ,    # The top header of the page with the masthead and motto.
       p({ id => 'motto' },
         'Vintage computing, cyber security and other interesting stuff.');
 }
 
 sub footer {
-    div(
+    div(    # The footer of the page with copyright info and scripts.
         { id => 'copyright' },
         txt('Copyright Rhys Adams, 2022-' . (1900 + (localtime)[5])),
         script(
@@ -127,13 +129,14 @@ sub footer {
 }
 
 sub sidebar {
+    # Sidebar is blank by default.
     p();
 }
 
 sub page {
     my %args = @_;
 
-    div(
+    div(    # Build a page with the correct classes.
         { class => 'page' },
         div({ class => 'header' },  $args{header}  // &header),
         div({ class => 'navbar' },  $args{navbar}  // &navbar),
@@ -144,6 +147,6 @@ sub page {
 }
 
 sub http_header {
-    CGI::header("text/html;charset=UTF-8");
+    CGI::header("text/html;charset=UTF-8");    # Enable unicode on all pages.
 }
 1;

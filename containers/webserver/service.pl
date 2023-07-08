@@ -8,24 +8,27 @@ my $file = $0;
 my $COMPOSE = 'podman-compose';
 
 sub usage {
-	print "Usage: $file [start|stop|restart|status]\n";
+    print "Usage: $file [start|stop|restart|status]\n";
 }
 
 my $op = shift @ARGV or die &usage;
 
-
-if($op eq 'start'){
-	system("$COMPOSE pull");
-	system("$COMPOSE build");
-	system("$COMPOSE up -d");
-} elsif ($op eq 'stop'){
-	system("$COMPOSE down");
-} elsif ($op eq 'status'){
-	system("$COMPOSE ps");
-} elsif ($op eq 'restart'){
-	system("$COMPOSE down");
-	system("$COMPOSE up -d");
-} elsif ($op eq 'pull'){
-	system("$COMPOSE pull");
-	system("$COMPOSE build");
+if ( $op eq 'start' ) {
+    system("$COMPOSE pull");
+    system("$COMPOSE build");
+    system("$COMPOSE up -d");
+}
+elsif ( $op eq 'stop' ) {
+    system("$COMPOSE down");
+}
+elsif ( $op eq 'status' ) {
+    system("$COMPOSE ps");
+}
+elsif ( $op eq 'restart' ) {
+    system("$COMPOSE down");
+    system("$COMPOSE up -d");
+}
+elsif ( $op eq 'pull' ) {
+    system("$COMPOSE pull");
+    system("$COMPOSE build");
 }
