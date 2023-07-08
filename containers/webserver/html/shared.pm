@@ -124,6 +124,10 @@ sub footer {
     );
 }
 
+sub sidebar {
+    p();
+}
+
 sub page {
     my %args = @_;
 
@@ -131,7 +135,7 @@ sub page {
         { class => 'page' },
         div({ class => 'header' },  $args{header}  // &header),
         div({ class => 'navbar' },  $args{navbar}  // &navbar),
-        div({ class => 'sidebar' }, $args{sidebar} // p()),
+        div({ class => 'sidebar' }, $args{sidebar} // &sidebar),
         div({ class => 'content' }, $args{content} // p()),
         div({ class => 'footer' },  $args{footer}  // &footer)
     );

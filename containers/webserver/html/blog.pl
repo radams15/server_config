@@ -61,22 +61,31 @@ sub content {
         div({
                 class => 'centre_page'
             },
-            ul(
+            table(
+                {
+                    id => 'blog_table',
+                },
+                Tr(
+                    th('Title'),
+                    th('Published'),
+                    th('Tags'),
+                ),
                 map {
-                    li(
-                        a({
+                    Tr(
+                        td(a({
                                 href => "/post?post=$$_[0]",
                             },
-                            "$$_[1]{Title} - $$_[1]{Published}",
-                        ),
-                        map {
+                            "$$_[1]{Title}",
+                        )),
+                        td($$_[1]{Published}),
+                        td(map {
                             a({
                                     class => 'topic_round',
                                     href  => "/blog?tags=$_"
                                 },
                                 $_
                             )
-                        } @{ $$_[1]{Tags} },
+                        } @{ $$_[1]{Tags} }),
                     )
                 } &posts(split /,\s*/, param('tags')),
             ),

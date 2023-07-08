@@ -19,6 +19,12 @@ html, body {
 
 .content {
     background-color: var(--content_bg);
+    overflow: hidden;
+}
+
+.sidebar {
+    float: left;
+    max-width: 200px;
 }
 
 .header {
@@ -128,6 +134,20 @@ li, li a {
 .footer * {
     margin-right: 20px;
     color: var(--nav_fg);
+}
+
+#blog_table {
+    border-collapse: collapse;
+}
+
+#blog_table tr {
+    border-bottom: 1px solid var(--fg);
+    height: 3em;
+}
+
+
+#blog_table td {
+    padding-right: 1em;
 }
 
 script { display: none !important; }
