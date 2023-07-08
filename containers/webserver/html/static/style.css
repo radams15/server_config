@@ -19,7 +19,7 @@ html, body {
 
 .content {
     background-color: var(--content_bg);
-    overflow: hidden;
+    margin-top: 30px;
 }
 
 .sidebar {

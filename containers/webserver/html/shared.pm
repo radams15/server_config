@@ -25,7 +25,7 @@ my %MENU = (
 my @order = qw/ Home About Projects Blog Links Contact /;
 
 my @stylesheets =
-  qw: static/solarized.css static/style.css static/dropdown.css static/post.css :;
+  qw: static/colours.css static/style.css static/dropdown.css static/post.css :;
 
 sub page_head {
     my ($title) = @_;

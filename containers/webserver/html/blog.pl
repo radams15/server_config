@@ -61,15 +61,10 @@ sub content {
         div({
                 class => 'centre_page'
             },
-            table(
-                {
+            table({
                     id => 'blog_table',
                 },
-                Tr(
-                    th('Title'),
-                    th('Published'),
-                    th('Tags'),
-                ),
+                Tr(th('Title'), th('Published'), th('Tags'),),
                 map {
                     Tr(
                         td(a({
@@ -78,14 +73,16 @@ sub content {
                             "$$_[1]{Title}",
                         )),
                         td($$_[1]{Published}),
-                        td(map {
-                            a({
-                                    class => 'topic_round',
-                                    href  => "/blog?tags=$_"
-                                },
-                                $_
-                            )
-                        } @{ $$_[1]{Tags} }),
+                        td(
+                            map {
+                                a({
+                                        class => 'topic_round',
+                                        href  => "/blog?tags=$_"
+                                    },
+                                    $_
+                                )
+                            } @{ $$_[1]{Tags} }
+                        ),
                     )
                 } &posts(split /,\s*/, param('tags')),
             ),

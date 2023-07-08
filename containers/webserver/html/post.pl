@@ -71,9 +71,8 @@ sub load_post {
         p("Published: $conf{Published}"),
         "Tags: ",
         (
-            map {
-                a({ class => 'topic_round', href => "/blog?tags=$_", }, $_)
-            } @{ $conf{Tags} }
+            map { a({ class => 'topic_round', href => "/blog?tags=$_", }, $_) }
+              @{ $conf{Tags} }
         ),
     );
 
