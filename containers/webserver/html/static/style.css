@@ -1,0 +1,154 @@
+@import url("https://fonts.googleapis.com/css2?family=Libre+Baskerville&family=Philosopher&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Vollkorn&display=swap");
+html {
+  background-color: #f1f1f1;
+  font-family: "Vollkorn", serif;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+.page {
+  margin: 0 auto;
+  max-width: 900px;
+}
+
+.content {
+  border-left: 2px solid #d7dddb;
+  border-right: 2px solid #d7dddb;
+  margin-top: 30px;
+}
+
+.sidebar {
+  float: left;
+  max-width: 200px;
+}
+
+.header {
+  display: flex;
+}
+
+#header_title {
+  justify-content: flex-start;
+}
+
+#motto {
+  justify-content: flex-end;
+  margin-left: auto;
+  align-items: center;
+  color: #abb8c3;
+  max-width: 250px;
+}
+
+#copyright {
+  flex: 1;
+  text-align: right;
+}
+
+@media screen and (min-width: 601px) {
+  :root {
+    --h1: 3em;
+    --h2: 2em;
+    --text: 1em;
+  }
+}
+@media screen and (max-width: 600px) {
+  :root {
+    --h1: 3em;
+    --h2: 2em;
+    --text: 1em;
+  }
+}
+#container {
+  min-height: 100%;
+  position: relative;
+  padding-bottom: 1em;
+}
+
+.title {
+  color: black;
+}
+
+.centre {
+  margin: auto;
+  width: 50%;
+  padding: 10px;
+  text-align: center;
+}
+
+.centre_page {
+  margin: auto;
+  width: 70%;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+h1 {
+  color: black;
+  font-family: "Libre Baskerville", serif;
+}
+
+h2 {
+  color: black;
+  font-family: "Libre Baskerville", serif;
+}
+
+a {
+  color: black;
+}
+
+.text {
+  color: black;
+}
+
+li, li a {
+  padding: 5px;
+  color: black;
+}
+
+.topic_round {
+  border-radius: 50%;
+  text-align: center;
+  color: black;
+  width: 5em;
+  padding: 2px;
+  font-size: 0.7em;
+  display: inline;
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  background-color: #d7dddb;
+  height: 60px;
+  padding: 10px;
+  border-radius: 10px;
+  margin-top: 30px;
+}
+
+.footer * {
+  margin-right: 20px;
+  color: #abb8c3;
+}
+
+#blog_table {
+  border-collapse: collapse;
+}
+
+#blog_table tr {
+  border-bottom: 1px solid black;
+  height: 3em;
+}
+
+#blog_table td {
+  padding-right: 1em;
+}
+
+script {
+  display: none !important;
+}
+
+/*# sourceMappingURL=style.css.map */

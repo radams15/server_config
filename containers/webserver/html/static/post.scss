@@ -2,9 +2,7 @@
 
 .post_body {
 	margin-top: 1em;
-	font-size: defs.$text;
-	border: 1px solid defs.$red;
-	color: defs.$base0;
+	font-size: 1em;
 }
 
 .post_body .topic_round {
@@ -25,7 +23,6 @@
 }
 
 .post_body code {
-	background-color: defs.$base2;
 	padding: 2px;
 }
 
