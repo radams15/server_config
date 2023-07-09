@@ -17,7 +17,7 @@ sub linkify_imgs {
     $data =~ s:<img .*?src="(.*?)".*?alt="(.*?)".*?>:
         <figure>
             <a href="$1">
-                <img src="$1.webp" alt="$2">
+                <img src="$1" alt="$2">
             </a>
             <figcaption>$2</figcaption>
         </figure>
