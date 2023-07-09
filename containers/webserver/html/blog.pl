@@ -7,6 +7,8 @@ use Text::Markdown qw/ markdown /;
 use lib '.';
 use shared ();
 
+use Time::Piece;
+
 print &http_header;
 
 my $POST_DIR = "posts";
@@ -29,6 +31,7 @@ sub posts {
         }
         close FH;
 
+        $conf{Published} = Time::Piece->strptime($conf{Published}, '%d/%m/%Y'); # Convert from dd/mm/YYYY to perl Time::Piece format.
         $conf{Tags} = [split ',\s*', $conf{Tags}]
           ;    # Split the tags string by comma into a list.
 
@@ -46,7 +49,7 @@ sub posts {
         }
 
     }
-    sort { $$b[1]{Published} cmp $$a[1]{Published} }
+    sort { $$b[1]{Published}->epoch <=> $$a[1]{Published}->epoch } # Compare the epochs of the dates.
       @out;    # Return sorted by publish date.
 }
 
@@ -74,7 +77,7 @@ sub content {
                             },
                             "$$_[1]{Title}",
                         )),
-                        td($$_[1]{Published}),
+                        td($$_[1]{Published}->strftime('%A %e %B %Y')), # Format the date to readable format.
                         td(
                             map {
                                 a({
@@ -83,7 +86,7 @@ sub content {
                                     },
                                     $_
                                 )
-                            } @{ $$_[1]{Tags} }
+                            } @{ $$_[1]{Tags} } # Add a filter link for each tag.
                         ),
                     )
                 } &posts(split /,\s*/, param('tags')),
