@@ -5,7 +5,15 @@
 	color: var(--base0);
 }
 
+.post_body .topic_round {
+    display: inline;
+}
+
 .post_body img {
+	width: 100%;
+}
+
+.post_body video {
 	width: 100%;
 }
 
