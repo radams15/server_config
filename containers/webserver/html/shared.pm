@@ -25,7 +25,7 @@ my %MENU = (
 my @order = qw/ Home About Projects Blog Links Contact /;
 
 my @stylesheets =
-  qw: static/colours.css static/style.css static/dropdown.css static/post.css :;
+  qw: static/vollkorn.css static/libre_baskerville.css static/style.css static/dropdown.css static/post.css :;
 
 sub page_head {
     my ($title) = @_;
@@ -34,7 +34,18 @@ sub page_head {
 
     (
         title($title),
-        map { Link({ rel => 'stylesheet', type => 'text/css', href => $_, }) }
+        map {
+=pod
+            if($_ =~ /[^_].*\.scss/) {
+                (my $new = $_) =~ s/\.scss^/.css/g;
+                print STDERR `sass $_ -o $new`;
+                
+                $_ = $new;
+            }
+=cut
+            
+            Link({ rel => 'stylesheet', type => 'text/css', href => $_, })
+        }
           @stylesheets,    # Link to all the stylesheets
     );
 }

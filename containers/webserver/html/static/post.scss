@@ -1,8 +1,10 @@
+@use '_defs';
+
 .post_body {
 	margin-top: 1em;
-	font-size: var(--text);
-	border: 1px solid var(--red);
-	color: var(--base0);
+	font-size: defs.$text;
+	border: 1px solid defs.$red;
+	color: defs.$base0;
 }
 
 .post_body .topic_round {
@@ -23,7 +25,7 @@
 }
 
 .post_body code {
-	background-color: var(--base2);
+	background-color: defs.$base2;
 	padding: 2px;
 }
 
@@ -42,3 +44,4 @@
     padding: 10px;
     text-align: center;
 }
+

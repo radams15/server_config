@@ -14,9 +14,11 @@ my $POST_DIR = "posts";
 sub linkify_imgs {
     my ($data) = @_;
 
-    $data =~ s:<img.*?src="(.*?)".*? alt="(.*?)".*?>:
+    $data =~ s:<img .*?src="(.*?)".*?alt="(.*?)".*?>:
         <figure>
-            <a href="$1">$&</a>
+            <a href="$1">
+                <img src="$1.webp" alt="$2">
+            </a>
             <figcaption>$2</figcaption>
         </figure>
         :mg;
@@ -38,10 +40,8 @@ sub md2html {
 
     $out,
       script({
-            src =>
-'https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js',
-        },
-        ''
+            src => '/static/run_prettify.js'
+        }, ''
       );
 }
 
