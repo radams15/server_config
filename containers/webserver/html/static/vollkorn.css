@@ -2,5 +2,5 @@
   font-family: 'Vollkorn';
   font-style: normal;
   font-weight: 400;
-  src: url(https://fonts.gstatic.com/s/vollkorn/v22/0ybgGDoxxrvAnPhYGzMlQLzuMasz6Df2MHGuGQ.ttf) format('truetype');
+  src: url(/static/vollkorn.ttf) format('truetype');
 }
