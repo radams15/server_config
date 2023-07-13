@@ -15,8 +15,8 @@ html, body {
 }
 
 .content {
-  border-left: 2px solid #d7dddb;
-  border-right: 2px solid #d7dddb;
+  background-color: white;
+  border-radius: 10px;
   margin-top: 30px;
 }
 
@@ -120,7 +120,7 @@ li, li a {
 .footer {
   display: flex;
   align-items: center;
-  background-color: #d7dddb;
+  background-color: white;
   height: 60px;
   padding: 10px;
   border-radius: 10px;

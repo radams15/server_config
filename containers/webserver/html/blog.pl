@@ -49,7 +49,8 @@ sub posts {
         }
 
     }
-    sort { $$b[1]{Published}->epoch <=> $$a[1]{Published}->epoch } # Compare the epochs of the dates.
+
+    grep {not $$_[1]{Disabled}} sort { $$b[1]{Published}->epoch <=> $$a[1]{Published}->epoch } # Compare the epochs of the dates.
       @out;    # Return sorted by publish date.
 }
 
@@ -65,6 +66,7 @@ sub content {
         div({
                 class => 'centre_page'
             },
+            p('Here is some things that I found interesting, maybe you will too:'),
             table({
                     id => 'blog_table',
                 },

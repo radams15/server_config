@@ -17,8 +17,8 @@ html, body {
 }
 
 .content {
-    border-left: 2px solid defs.$content_bg;
-    border-right: 2px solid defs.$content_bg;
+    background-color: defs.$content_bg;
+    border-radius: 10px;
     margin-top: 30px;
 }
 

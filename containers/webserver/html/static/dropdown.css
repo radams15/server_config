@@ -1,5 +1,5 @@
 .navbar {
-  background-color: #3c6e71;
+  background-color: black;
   overflow: hidden;
   border-radius: 5px;
 }
@@ -12,7 +12,7 @@
   padding: 14px 16px;
   text-decoration: none;
   color: #abb8c3;
-  background-color: #3c6e71;
+  background-color: black;
 }
 
 .nav_selected {
@@ -30,20 +30,20 @@
   outline: none;
   color: #abb8c3;
   padding: 14px 16px;
-  background-color: #3c6e71;
+  background-color: black;
   font-family: inherit;
   margin: 0;
 }
 
 .navbar a:hover, .dropdown:hover .dropbtn {
-  background-color: #497a7c;
+  background-color: #666;
   color: white;
 }
 
 .dropdown-content {
   display: none;
   position: absolute;
-  background-color: #3c6e71;
+  background-color: black;
   min-width: 160px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
@@ -59,7 +59,7 @@
 }
 
 .dropdown-content a:hover {
-  background-color: #497a7c;
+  background-color: #666;
   color: white;
 }
 
