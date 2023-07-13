@@ -1,9 +1,9 @@
 version : "3"
 services :
   nginx:
-    build: .
+    build: therhys.co.uk
     ports:
       - 8080:80
     volumes:
       - ./default.conf:/etc/apache2/sites-enabled/000-default.conf:z
-      - ./html:/var/www/html:z
+      - ./therhys.co.uk:/var/www/html:z
