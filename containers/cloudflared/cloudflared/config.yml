@@ -8,11 +8,10 @@ ingress:
 #    service: http://matrix:8008
 #  - hostname: cloud.therhys.co.uk
 #    service: http://nextcloud
-#  - hostname: ssh.therhys.co.uk
-#    service: ssh://127.0.0.1:22
-  - hostname: lemmy.therhys.co.uk
-    service: https://127.0.0.1:3031
+  - hostname: invidious.therhys.co.uk
+    service: http://localhost:3333
   - service: http://127.0.0.1:80
+#   - service: http://10.0.0.113:3000
 
 originRequest:
   noTLSVerify: true

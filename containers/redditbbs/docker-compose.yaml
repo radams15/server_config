@@ -1,8 +1,0 @@
-version : "3"
-services:
-  app:
-    image: docker.io/radams15/redditbbs:latest
-    ports:
-      - 9999:9999
-    volumes:
-      - ./database.db:/app/database.db:z

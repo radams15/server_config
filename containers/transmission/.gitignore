@@ -1,0 +1,6 @@
+prowlarr/
+jackett/
+sonarr/
+radarr/
+transmission/
+.env

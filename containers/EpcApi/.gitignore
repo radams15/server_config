@@ -1,0 +1,7 @@
+*.tar.gz
+geckodriver
+*.bin
+epc-report
+*.deb
+report.html
+app/

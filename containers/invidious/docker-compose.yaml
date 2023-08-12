@@ -1,0 +1,34 @@
+version: "3"
+services:
+
+  invidious:
+    image: quay.io/invidious/invidious:latest
+    restart: unless-stopped
+    ports:
+      - 3333:3000
+    environment:
+      INVIDIOUS_CONFIG: |
+        db:
+          dbname: invidious
+          user: ${DB_USER}
+          password: ${DB_PASS}
+          host: invidious-db
+          port: 5432
+        check_tables: true
+        hmac_key: ${HMAC_KEY}
+        registration_enabled: false
+        admins: ["rhys"]
+
+  invidious-db:
+    image: docker.io/library/postgres:14
+    restart: unless-stopped
+    volumes:
+      - ./db:/var/lib/postgresql/data:z
+      - ./config/sql:/config/sql:z
+      - ./init-invidious-db.sh:/docker-entrypoint-initdb.d/init-invidious-db.sh:z
+    environment:
+      POSTGRES_DB: invidious
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASS}
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
