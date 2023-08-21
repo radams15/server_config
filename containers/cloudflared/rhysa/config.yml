@@ -1,0 +1,10 @@
+tunnel: aea79fc0-9cd5-4ad2-904b-30e810570aab
+credentials-file: /etc/cloudflared/aea79fc0-9cd5-4ad2-904b-30e810570aab.json
+
+ingress:
+  - service: http://127.0.0.1:80
+
+originRequest:
+  noTLSVerify: true
+
+no-tls-verify: true

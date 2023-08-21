@@ -1,3 +1,5 @@
-cloudflared/*.json
-cloudflared/*.pem
+rhysa/*.json
+rhysa/*.pem
+therhys/*.json
+therhys/*.pem
 .env

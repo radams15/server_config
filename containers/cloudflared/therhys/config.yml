@@ -10,6 +10,8 @@ ingress:
 #    service: http://nextcloud
   - hostname: invidious.therhys.co.uk
     service: http://localhost:3333
+  - hostname: rhysa.co.uk
+    service: http://127.0.0.1:80
   - service: http://127.0.0.1:80
 #   - service: http://10.0.0.113:3000
 

@@ -1,11 +1,19 @@
 version: '3.2'
 
 services:
-  cloudflared:
+  rhysa:
     image: cloudflare/cloudflared
     user: 0:0
     network_mode: host
     restart: unless-stopped
     volumes:
-      - ./cloudflared:/etc/cloudflared:z
+      - ./rhysa:/etc/cloudflared:z
+    command: tunnel run
+  therhys:
+    image: cloudflare/cloudflared
+    user: 0:0
+    network_mode: host
+    restart: unless-stopped
+    volumes:
+      - ./therhys:/etc/cloudflared:z
     command: tunnel run
