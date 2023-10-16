@@ -4,6 +4,8 @@ credentials-file: /etc/cloudflared/13cbcc70-7650-4752-9ea7-e7088d07925e.json
 ingress:
   - hostname: ssh.therhys.co.uk
     service: ssh://localhost
+  - hostname: mealie.therhys.co.uk
+    service: http://localhost:9925
   - hostname: invidious.therhys.co.uk
     service: http://localhost:3333
   - service: http://127.0.0.1:80
