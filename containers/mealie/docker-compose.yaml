@@ -15,7 +15,7 @@ services:
       - TZ=Europe/Londom
       - MAX_WORKERS=1
       - WEB_CONCURRENCY=1
-      - BASE_URL=https://therhys.co.uk/mealie
+      - BASE_URL=https://mealie.therhys.co.uk
 
       - DB_ENGINE=postgres
       - POSTGRES_USER=${DB_USER}
