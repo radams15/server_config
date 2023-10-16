@@ -9,6 +9,7 @@ sub policy {
 	print "iptables --policy INPUT DROP\n";
 	print "iptables -A INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT\n";
 	print "iptables -A INPUT -p tcp -s localhost -j ACCEPT\n";
+	print "sudo iptables -t nat -A POSTROUTING -j MASQUERADE\n";
 }
 
 sub allow_port {

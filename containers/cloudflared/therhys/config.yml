@@ -2,18 +2,11 @@ tunnel: 13cbcc70-7650-4752-9ea7-e7088d07925e
 credentials-file: /etc/cloudflared/13cbcc70-7650-4752-9ea7-e7088d07925e.json
 
 ingress:
-#  - hostname: files.therhys.co.uk
-#    service: http://files.therhys.co.uk
-#  - hostname: matrix.therhys.co.uk
-#    service: http://matrix:8008
-#  - hostname: cloud.therhys.co.uk
-#    service: http://nextcloud
+  - hostname: ssh.therhys.co.uk
+    service: ssh://localhost
   - hostname: invidious.therhys.co.uk
     service: http://localhost:3333
-  - hostname: rhysa.co.uk
-    service: http://127.0.0.1:80
   - service: http://127.0.0.1:80
-#   - service: http://10.0.0.113:3000
 
 originRequest:
   noTLSVerify: true

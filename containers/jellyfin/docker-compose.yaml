@@ -11,6 +11,7 @@ services:
       - ./cache:/cache:z
       - /mnt/share/TV:/TV:z
       - /mnt/share/Movies:/Movies:z
+      - /mnt/share/Music:/Music:z
     restart: 'unless-stopped'
 #    Optional - alternative address used for autodiscovery
 #    environment:

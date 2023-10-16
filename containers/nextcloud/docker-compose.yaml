@@ -30,3 +30,11 @@ services:
       - OVERWRITEWEBROOT=/cloud
       - OVERWRITEHOST=therhys.co.uk
       - OVERWRITEPROTOCOL=https
+      - REDIS_HOST=redis
+
+  redis:
+    image: docker.io/redis:alpine
+    container_name: redis
+    volumes:
+      - ./redis:/data:z
+    restart: unless-stopped

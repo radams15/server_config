@@ -1,3 +1,4 @@
 cloud/
 db/
+redis/
 .env
