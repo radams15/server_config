@@ -5,5 +5,9 @@ services :
     container_name: nginx_container
     volumes:
       - ./nginx:/etc/nginx:z
-    network_mode: host
+      - ./conf:/etc/nginx/conf:z
+      - ./certs:/certs:z
+    ports:
+      - 80:80
+      - 443:443
 
